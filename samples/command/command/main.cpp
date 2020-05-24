@@ -47,7 +47,7 @@ CMenuFP::Command CreateMacroCommand(Commands && commands)
 
 void TestMenuWithClassicCommandPattern()
 {
-	CRobot robot;
+	Robot robot;
 	CMenu menu;
 	menu.AddItem("on", "Turns the Robot on",
 		make_unique<CTurnOnCommand>(robot));
@@ -84,34 +84,34 @@ void TestMenuWithClassicCommandPattern()
 
 void TestMenuWithFunctionalCommandPattern()
 {
-	CRobot robot;
+	Robot robot;
 	CMenuFP menu;
 
 	menu.AddItem("on", "Turns the Robot on", [&] { 
 		robot.TurnOn(); 
 	});
 	menu.AddItem("off", "Turns the Robot off",
-		bind(&CRobot::TurnOff, &robot));
+		bind(&Robot::TurnOff, &robot));
 
 	menu.AddItem("north", "Makes the Robot walk north", 
-		bind(&CRobot::Walk, &robot, WalkDirection::North));
+		bind(&Robot::Walk, &robot, WalkDirection::North));
 	menu.AddItem("south", "Makes the Robot walk south", 
-		bind(&CRobot::Walk, &robot, WalkDirection::South));
+		bind(&Robot::Walk, &robot, WalkDirection::South));
 	menu.AddItem("west", "Makes the Robot walk west", 
-		bind(&CRobot::Walk, &robot, WalkDirection::West));
+		bind(&Robot::Walk, &robot, WalkDirection::West));
 	menu.AddItem("east", "Makes the Robot walk east", 
-		bind(&CRobot::Walk, &robot, WalkDirection::East));
+		bind(&Robot::Walk, &robot, WalkDirection::East));
 
 	menu.AddItem("stop", "Stops the Robot", 
-		bind(&CRobot::Stop, &robot));
+		bind(&Robot::Stop, &robot));
 
 	menu.AddItem("patrol", "Patrol the territory", CreateMacroCommand<vector<CMenuFP::Command>>({
-			bind(&CRobot::TurnOn, &robot),
-			bind(&CRobot::Walk, &robot, WalkDirection::North),
-			bind(&CRobot::Walk, &robot, WalkDirection::South),
-			bind(&CRobot::Walk, &robot, WalkDirection::West),
-			bind(&CRobot::Walk, &robot, WalkDirection::East),
-			bind(&CRobot::TurnOff, &robot)
+			bind(&Robot::TurnOn, &robot),
+			bind(&Robot::Walk, &robot, WalkDirection::North),
+			bind(&Robot::Walk, &robot, WalkDirection::South),
+			bind(&Robot::Walk, &robot, WalkDirection::West),
+			bind(&Robot::Walk, &robot, WalkDirection::East),
+			bind(&Robot::TurnOff, &robot)
 		}));
 
 	menu.AddItem("help", "Show instructions", 

@@ -5,7 +5,7 @@
 class CTurnOnCommand : public ICommand
 {
 public:
-	CTurnOnCommand(CRobot & robot)
+	CTurnOnCommand(Robot & robot)
 		: m_robot(robot)
 	{}
 
@@ -14,13 +14,13 @@ public:
 		m_robot.TurnOn();
 	}
 private:
-	CRobot & m_robot;
+	Robot & m_robot;
 };
 
 class CTurnOffCommand : public ICommand
 {
 public:
-	CTurnOffCommand(CRobot & robot)
+	CTurnOffCommand(Robot & robot)
 		:m_robot(robot)
 	{}
 	void Execute() override
@@ -28,13 +28,13 @@ public:
 		m_robot.TurnOff();
 	}
 private:
-	CRobot & m_robot;
+	Robot & m_robot;
 };
 
 class CWalkCommand : public ICommand
 {
 public:
-	CWalkCommand(CRobot & robot, WalkDirection direction)
+	CWalkCommand(Robot & robot, WalkDirection direction)
 		: m_robot(robot)
 		, m_direction(direction)
 	{}
@@ -43,14 +43,14 @@ public:
 		m_robot.Walk(m_direction);
 	}
 private:
-	CRobot & m_robot;
+	Robot & m_robot;
 	WalkDirection m_direction;
 };
 
 class CStopCommand : public ICommand
 {
 public:
-	CStopCommand(CRobot & robot)
+	CStopCommand(Robot & robot)
 		: m_robot(robot)
 	{}
 	void Execute() override
@@ -58,7 +58,7 @@ public:
 		m_robot.Stop();
 	}
 private:
-	CRobot & m_robot;
+	Robot & m_robot;
 };
 
 class CMacroCommand : public ICommand

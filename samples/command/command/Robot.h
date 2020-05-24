@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <iostream>
 #include <map>
-#include <boost/optional.hpp>
+#include <optional>
 
 enum class WalkDirection
 {
@@ -11,7 +11,7 @@ enum class WalkDirection
 	East,
 };
 
-class CRobot
+class Robot
 {
 public:
 	void TurnOn()
@@ -77,5 +77,5 @@ public:
 	}
 private:
 	bool m_turnedOn = false;
-	boost::optional<WalkDirection> m_direction;
+	std::optional<WalkDirection> m_direction;
 };
