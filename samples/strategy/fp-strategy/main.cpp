@@ -37,7 +37,7 @@ int SubtractionStrategy(int x, int y)
 	return x - y;
 }
 
-void main()
+int main()
 {
 	{
 		int numbers[] = { 6, 3, 2, 1, 3, 4 };

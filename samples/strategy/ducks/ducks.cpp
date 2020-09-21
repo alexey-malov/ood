@@ -54,7 +54,7 @@ public:
 	}
 };
 
-void main()
+int main()
 {
 
 }

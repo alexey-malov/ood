@@ -174,7 +174,7 @@ void PlayWithDuck(Duck& duck)
 	cout << endl;
 }
 
-void main()
+int main()
 {
 	MallardDuck mallardDuck;
 	PlayWithDuck(mallardDuck);
