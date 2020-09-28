@@ -60,7 +60,7 @@ public:
 protected:
 	double GetCondimentCost()const override
 	{
-		return 10 * m_quantity;
+		return 10.0 * m_quantity;
 	}
 	std::string GetCondimentDescription()const override
 	{
@@ -145,7 +145,7 @@ public:
 
 	double GetCondimentCost()const override
 	{
-		return 2 * m_mass;
+		return 2.0 * m_mass;
 	}
 
 	std::string GetCondimentDescription()const override
@@ -168,7 +168,7 @@ public:
 protected:
 	double GetCondimentCost()const override
 	{
-		return 1 * m_mass;
+		return 1.0 * m_mass;
 	}
 	std::string GetCondimentDescription()const override
 	{
