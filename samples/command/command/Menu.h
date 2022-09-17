@@ -1,9 +1,9 @@
-#pragma once
+﻿#pragma once
 #include <vector>
 #include <string>
 #include <memory>
 #include <iostream>
-#include <boost/range/algorithm/find_if.hpp>
+#include <algorithm>
 
 #include "ICommand.h"
 
@@ -49,7 +49,7 @@ private:
 	{
 		m_exit = false;
 
-		auto it = boost::find_if(m_items, [&](const Item & item) {
+		auto it = std::find_if(m_items.begin(), m_items.end(), [&](const Item & item) {
 			return item.shortcut == command;
 		});
 		if (it != m_items.end())

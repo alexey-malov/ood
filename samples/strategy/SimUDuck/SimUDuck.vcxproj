@@ -148,6 +148,22 @@
   <ItemGroup>
     <ClCompile Include="SimUDuck.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lib\DuckFunctions.h" />
+    <ClInclude Include="lib\Duck\DecoyDuck.h" />
+    <ClInclude Include="lib\Duck\Duck.h" />
+    <ClInclude Include="lib\Duck\Fly\FlyNoWay.h" />
+    <ClInclude Include="lib\Duck\Fly\FlyWithWings.h" />
+    <ClInclude Include="lib\Duck\Fly\IFlyBehavior.h" />
+    <ClInclude Include="lib\Duck\MallardDuck.h" />
+    <ClInclude Include="lib\Duck\ModelDuck.h" />
+    <ClInclude Include="lib\Duck\Quack\IQuakBehavior.h" />
+    <ClInclude Include="lib\Duck\Quack\MuteQuackBehavior.h" />
+    <ClInclude Include="lib\Duck\Quack\QuackBehavior.h" />
+    <ClInclude Include="lib\Duck\Quack\SqueakBehavior.h" />
+    <ClInclude Include="lib\Duck\RedheadDuck.h" />
+    <ClInclude Include="lib\Duck\RubberDuck.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
