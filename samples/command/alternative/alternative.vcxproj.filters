@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="undo">
+      <UniqueIdentifier>{f7154898-7e31-413a-84f4-a301d2dcc7ef}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractUndoableEdit.cpp">
+      <Filter>undo</Filter>
+    </ClCompile>
+    <ClCompile Include="CompoundEdit.cpp">
+      <Filter>undo</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IUndoableEdit.h">
+      <Filter>undo</Filter>
+    </ClInclude>
+    <ClInclude Include="IUndoableEdit_fwd.h">
+      <Filter>undo</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractUndoableEdit.h">
+      <Filter>undo</Filter>
+    </ClInclude>
+    <ClInclude Include="CompoundEdit.h">
+      <Filter>undo</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
