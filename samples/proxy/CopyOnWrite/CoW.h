@@ -4,10 +4,10 @@
 #include <cassert>
 
 template <typename T>
-class CCow
+class CoW
 {
 	template <typename U>
-	struct CCopyConstr
+	struct CopyConstr
 	{
 		static std::unique_ptr<U> Copy(U const& other)
 		{
@@ -16,68 +16,76 @@ class CCow
 	};
 
 	template <typename U>
-	struct CCloneConstr
+	struct CloneConstr
 	{
 		static std::unique_ptr<U> Copy(U const& other)
 		{
 			return other.Clone();
 		}
 	};
-	using CCopyClass = typename std::conditional<!std::is_abstract<T>::value && std::is_copy_constructible<T>::value, CCopyConstr<T>, CCloneConstr<T>>::type;
+	using CopyClass = typename std::conditional<
+		!std::is_abstract<T>::value && std::is_copy_constructible<T>::value,
+		CopyConstr<T>,
+		CloneConstr<T>>::type;
 
-public:
-	class CWriteProxy
+	class WriteProxy
 	{
 	public:
-		T * operator->()
+		WriteProxy(T* p)
+			: m_p(p)
+		{
+		}
+
+		T& operator*() const& = delete;
+		[[nodiscard]] T& operator*() const&& noexcept
+		{
+			return *m_p;
+		}
+
+		// Operator -> must be invoked only once on temporary object
+		// Do not store reference to CWriteProxy
+		T* operator->() const& = delete;
+		T* operator->() const&&
 		{
 			return m_p;
 		}
 
 	private:
-		friend class CCow;
-		CWriteProxy(CWriteProxy const&) = default;
-		CWriteProxy& operator=(CWriteProxy const&) = default;
-
-		CWriteProxy(T * p)
-			:m_p(p)
-		{
-		}
-
-		T * m_p;
+		T* m_p;
 	};
 
-	template <typename ...Args, typename = std::enable_if<!std::is_abstract<T>::value>::type>
-	CCow(Args&&... args)
-		:m_shared(std::make_shared<T>(std::forward<Args>(args)...))
+public:
+	template <typename... Args, typename = std::enable_if<!std::is_abstract<T>::value>::type>
+	CoW(Args&&... args)
+		: m_shared(std::make_shared<T>(std::forward<Args>(args)...))
 	{
 	}
 
 	// avoid duplicate object
-	CCow(CCow<T> && rhs)
-		:m_shared(std::move(rhs.m_shared))
+	CoW(CoW<T>&& rhs)
+		: m_shared(std::move(rhs.m_shared))
 	{
 	}
 
-	CCow(std::unique_ptr<T> pUniqueObj)
-		:m_shared(std::move(pUniqueObj))
+	CoW(std::unique_ptr<T> pUniqueObj)
+		: m_shared(std::move(pUniqueObj))
 	{
 	}
 
-	CCow & operator=(CCow<T> && rhs)
+	CoW& operator=(CoW<T>&& rhs)
 	{
 		m_shared = std::move(rhs.m_shared);
 		return *this;
 	}
 
 	template <typename U>
-	CCow(CCow<U> & rhs)
-		:m_shared(rhs.m_shared)
+	CoW(CoW<U>& rhs)
+		: m_shared(rhs.m_shared)
 	{
 	}
 
 	template <typename U>
-	CCow & operator=(CCow<U> & rhs)
+	CoW& operator=(CoW<U>& rhs)
 	{
 		m_shared = rhs.m_shared;
 		return *this;
@@ -85,56 +93,51 @@ public:
 
 	// vc generate copy, but c++11 don't allow this, implement for gcc
 
-	CCow(CCow const& rhs)
-		:m_shared(rhs.m_shared)
+	CoW(CoW const& rhs)
+		: m_shared(rhs.m_shared)
 	{
 	}
 
-	CCow & operator=(CCow const& rhs)
+	CoW& operator=(CoW const& rhs)
 	{
 		m_shared = rhs.m_shared;
 		return *this;
 	}
 
-	T const& operator*()const
+	T const& operator*() const&& noexcept = delete;
+	T const& operator*() const& noexcept
 	{
 		assert(m_shared);
 		return *m_shared;
 	}
 
-	T const* operator->()const
+	T const* operator->() const&& noexcept = delete;
+	T const* operator->() const& noexcept
 	{
 		assert(m_shared);
 		return m_shared.get();
 	}
 
-	CWriteProxy operator--(int)
+	WriteProxy operator--(int) &
 	{
 		assert(m_shared);
 		EnsureUnique();
-		return CWriteProxy(m_shared.get());
+		return WriteProxy(m_shared.get());
 	}
 
-	T & Write()
+	WriteProxy Write() &
 	{
 		assert(m_shared);
 		EnsureUnique();
-		return *m_shared;
-	}
-
-	std::shared_ptr<T> & WriteShared()
-	{
-		assert(m_shared);
-		EnsureUnique();
-		return m_shared;
+		return WriteProxy(m_shared.get());
 	}
 
 private:
 	void EnsureUnique()
 	{
-		if (!m_shared.unique())
+		if (m_shared.use_count() != 1)
 		{
-			m_shared = CCopyClass::Copy(*m_shared);
+			m_shared = CopyClass::Copy(*m_shared);
 		}
 	}
 

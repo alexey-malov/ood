@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <stdexcept>
 #include <sstream>
-#include <boost/format.hpp>
+#include <format>
 
 using namespace std;
 
@@ -39,8 +39,7 @@ public:
 
 	void Fly(Direction direction, int distance) override
 	{
-		cout << boost::format("I am flying %1% %2% km.") 
-			% DirectionToString(direction) % distance << endl;
+		cout << std::format("I am flying {} {} km.", DirectionToString(direction), distance) << endl;
 		m_totalDistance += distance;
 	}
 	int GetTotalFlyDistance() const override

@@ -4,7 +4,6 @@
 #include <memory>
 #include <functional>
 #include <fstream>
-#include <boost/noncopyable.hpp>
 
 using namespace std;
 
@@ -67,7 +66,7 @@ void LoadImageFromURL(const string & url,
 	callback(nullptr);
 }
 
-class CImageProxy : public IImage, boost::noncopyable
+class CImageProxy : public IImage
 {
 	struct Impl : enable_shared_from_this<Impl>
 	{

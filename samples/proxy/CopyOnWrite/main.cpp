@@ -52,49 +52,18 @@ private:
 };
 
 
+using namespace std::literals;
+
 int main()
 {
-	CCow<Logger> logger1;
-	CCow<Logger> logger2(logger1);
+	CoW<std::string> s1("Hello");
+	CoW<std::string> s2{ s1 };
+	// Для модификации значения нужно разыменовать результат вызова Write()
+	*s2.Write() = "Wor";
+	*s2.Write() += "ld";
+	// Можно вызывать неконстантные методы, используя ->
+	s2.Write()->append("!");
 
-	cout << logger1->data << endl;
-	cout << logger2->data << endl;
-
-	logger1.Write().data = 55;
-
-	cout << logger1->data << endl;
-	cout << logger2->data << endl;
-
-	logger1.Write().data = 66;
-
-	cout << logger1->data << endl;
-	cout << logger2->data << endl;
-
-	CCow<Logger> logger3(logger2);
-	cout << logger1->data << endl;
-	cout << logger2->data << endl;
-	cout << logger3->data << endl;
-
-	logger3--->data = 99;
-
-	logger3.WriteShared();
-
-	cout << logger1->data << endl;
-	cout << logger2->data << endl;
-	cout << logger3->data << endl;
-
-	
-	CCow<ISomething> something1(unique_ptr<ISomething>(new CSomething()));
-	if (auto p = dynamic_pointer_cast<CSomething>(something1.WriteShared()))
-	{
-		p->DoSomethingElse();
-	}
-	
-	auto somethingElse(something1);
-	somethingElse--->SetData(42);
-	cout << something1->GetData() << endl;
-	cout << somethingElse->GetData() << endl;
-
-
-	return 0;
+	auto writer = s2.Write();
+	//writer->append("!!!"); // А вот так не скомпилируется
 }
