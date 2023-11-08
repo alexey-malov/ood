@@ -29,7 +29,7 @@ public:
 	CStyle GetFillStyle()const;
 	void SetFillStyle(const CStyle& style);
 
-	virtual void Draw(const ICanvas & canvas) = 0;
+	virtual void Draw(ICanvas & canvas) const = 0;
 
 	virtual ~CShape() = default;
 };
@@ -37,19 +37,19 @@ public:
 class CRectangle : public CShape
 {
 public:
-	void Draw(const ICanvas & canvas) final;
+	void Draw(ICanvas & canvas) const final;
 };
 
 class CEllipse : public CShape
 {
 public:
-	void Draw(const ICanvas & canvas) final;
+	void Draw(ICanvas & canvas) const final;
 };
 
 class CTriangle : public CShape
 {
 public:
-	void Draw(const ICanvas & canvas) final;
+	void Draw(ICanvas & canvas) const final;
 };
 
 class CSlide

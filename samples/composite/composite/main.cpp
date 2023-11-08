@@ -3,17 +3,17 @@
 #include "Canvas.h"
 #include "version1.h"
 
-#include <boost/optional.hpp>
+#include <optional>
 #include <memory>
 #include <limits>
 #include <functional>
 
-using boost::optional;
+using std::optional;
 
 class IDrawable
 {
 public:
-	virtual void Draw(const ICanvas & canvas) = 0;
+	virtual void Draw(ICanvas & canvas) const = 0;
 
 	virtual ~IDrawable() = default;
 };
@@ -69,16 +69,16 @@ public:
 
 typedef std::function<void(ICanvas & canvas, const IShape & shape)> DrawingStrategy;
 
-class CSimpleShape : public IShape
+class SimpleShape : public IShape
 {
 public:
-	CSimpleShape(const DrawingStrategy & drawingStrategy)
+	SimpleShape(const DrawingStrategy & drawingStrategy)
 	{
 		(void)&drawingStrategy;
 	}
 };
 
-class CGroupShape : public IGroupShape
+class GroupShape : public IGroupShape
 {
 
 };
@@ -94,7 +94,7 @@ public:
 	virtual ~ISlide() = default;
 };
 
-class CSlide : public ISlide
+class Slide : public ISlide
 {
 public:
 

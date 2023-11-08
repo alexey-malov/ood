@@ -17,7 +17,7 @@ public:
 	CStyle GetFillStyle()const;
 	void SetFillStyle(const CStyle& style);
 
-	virtual void Draw(const ICanvas & canvas) = 0;
+	virtual void Draw(ICanvas & canvas) const = 0;
 
 	virtual ~CShape() = default;
 };
