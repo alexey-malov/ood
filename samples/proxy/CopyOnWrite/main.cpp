@@ -63,6 +63,8 @@ int main()
 	*s2.Write() += "ld";
 	// Можно вызывать неконстантные методы, используя ->
 	s2.Write()->append("!");
+	
+	s2--->append("!");
 
 	auto writer = s2.Write();
 	//writer->append("!!!"); // А вот так не скомпилируется
