@@ -118,7 +118,7 @@ public:
 		return m_shared.get();
 	}
 
-	WriteProxy operator--(int) &
+	[[nodiscard]] WriteProxy operator--(int) &
 	{
 		assert(m_shared);
 		EnsureUnique();
