@@ -27,7 +27,7 @@ void CMainDlgPresenter::InitView()
 
 void CMainDlgPresenter::UpdateSolution()
 {
-	struct SolutionPrinter : boost::static_visitor<void>
+	struct SolutionPrinter
 	{
 		IMainDlgView & view;
 		SolutionPrinter(IMainDlgView & view)

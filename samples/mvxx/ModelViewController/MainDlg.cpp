@@ -92,7 +92,7 @@ void CMainDlg::SetEquationText(const std::wstring & text)
 void CMainDlg::UpdateEquation()
 {
 	auto solution = m_solver.GetEquationRoots();
-	struct SolutionPrinter : boost::static_visitor<void>
+	struct SolutionPrinter
 	{
 		CMainDlg & self;
 		SolutionPrinter(CMainDlg &self)
@@ -155,10 +155,6 @@ void CMainDlg::OnChangeCoeffC()
 	{
 		m_controller.SetCoeffC(m_coeffC);
 	}
-}
-
-void CMainDlg::OnOK()
-{
 }
 
 void CMainDlg::OnKillfocusCoeffA()
