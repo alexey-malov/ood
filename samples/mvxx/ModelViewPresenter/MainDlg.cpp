@@ -3,10 +3,10 @@
 //
 
 #include "stdafx.h"
-#include "resource.h"
 #include "MainDlg.h"
-#include "afxdialogex.h"
 #include "EquationSolver.h"
+#include "afxdialogex.h"
+#include "resource.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -18,7 +18,7 @@ CMainDlg::CMainDlg(CWnd* pParent /*=NULL*/)
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
-BOOL CMainDlg::PreTranslateMessage(MSG * msg)
+BOOL CMainDlg::PreTranslateMessage(MSG* msg)
 {
 	if (msg->message == WM_KEYDOWN && msg->wParam == VK_RETURN)
 	{
@@ -56,13 +56,12 @@ BEGIN_MESSAGE_MAP(CMainDlg, CDialogEx)
 	ON_EN_KILLFOCUS(IDC_COEFF_C, &CMainDlg::OnKillfocusCoeffC)
 END_MESSAGE_MAP()
 
-
 BOOL CMainDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	SetIcon(m_hIcon, TRUE);			// Set big icon
-	SetIcon(m_hIcon, FALSE);		// Set small icon
+	SetIcon(m_hIcon, TRUE); // Set big icon
+	SetIcon(m_hIcon, FALSE); // Set small icon
 
 	m_chart.SubclassDlgItem(IDC_CHART, this);
 
@@ -70,7 +69,7 @@ BOOL CMainDlg::OnInitDialog()
 
 	UpdateEquation();
 
-	return TRUE;  // return TRUE  unless you set the focus to a control
+	return TRUE; // return TRUE  unless you set the focus to a control
 }
 
 void CMainDlg::SetCoeffs(double a, double b, double c)
@@ -84,12 +83,12 @@ void CMainDlg::SetCoeffs(double a, double b, double c)
 	}
 }
 
-sig::connection CMainDlg::DoOnInit(const InitSignal::slot_type & handler)
+sig::connection CMainDlg::DoOnInit(const InitSignal::slot_type& handler)
 {
 	return m_init.connect(handler);
 }
 
-IChartView & CMainDlg::GetChartView()
+IChartView& CMainDlg::GetChartView()
 {
 	return m_chart;
 }
@@ -106,41 +105,41 @@ void CMainDlg::SetInfiniteSolutions()
 
 void CMainDlg::SetSingleSolution(double solution)
 {
-	SetSolutionText((boost::wformat(L"One root: %1%") % solution).str());
+	SetSolutionText(std::format(L"One root: %1%", solution));
 }
 
 void CMainDlg::SetTwoRootsSolutuion(double root1, double root2)
 {
-	SetSolutionText((boost::wformat(L"Two roots: %1% and %2%") % root1 % root2).str());
+	SetSolutionText(std::format(L"Two roots: %1% and %2%", root1, root2));
 }
 
-sig::connection CMainDlg::DoOnCoeffAChange(const CoeffChangeSignal::slot_type & handler)
+sig::connection CMainDlg::DoOnCoeffAChange(const CoeffChangeSignal::slot_type& handler)
 {
 	return m_coeffAChanged.connect(handler);
 }
 
-sig::connection CMainDlg::DoOnCoeffBChange(const CoeffChangeSignal::slot_type & handler)
+sig::connection CMainDlg::DoOnCoeffBChange(const CoeffChangeSignal::slot_type& handler)
 {
 	return m_coeffBChanged.connect(handler);
 }
 
-sig::connection CMainDlg::DoOnCoeffCChange(const CoeffChangeSignal::slot_type & handler)
+sig::connection CMainDlg::DoOnCoeffCChange(const CoeffChangeSignal::slot_type& handler)
 {
 	return m_coeffCChanged.connect(handler);
 }
 
-void CMainDlg::SetSolutionText(const std::wstring & text)
+void CMainDlg::SetSolutionText(const std::wstring& text)
 {
 	SetDlgItemText(IDC_SOLUTION, text.c_str());
 }
 
-void CMainDlg::SetEquationText(const std::wstring & text)
+void CMainDlg::SetEquationText(const std::wstring& text)
 {
 	SetDlgItemText(IDC_EQUATION, text.c_str());
 }
 
 void CMainDlg::UpdateEquation()
-{	
+{
 	auto ToSignedString = [](double value) {
 		std::wostringstream strm;
 		strm << std::abs(value);
@@ -148,7 +147,7 @@ void CMainDlg::UpdateEquation()
 		return ((value < 0) ? L"- " : L"+ ") + strm.str();
 	};
 
-	SetEquationText((boost::wformat(L"%1%x\u00b2 %2%x %3% = 0") % m_coeffA % ToSignedString(m_coeffB) % ToSignedString(m_coeffC)).str());
+	SetEquationText(std::format(L"{}x\u00b2 {}x {} = 0", m_coeffA, ToSignedString(m_coeffB), ToSignedString(m_coeffC)));
 }
 
 void CMainDlg::OnChangeCoeffA()

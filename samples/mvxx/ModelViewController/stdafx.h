@@ -33,7 +33,7 @@
 #include <afxcontrolbars.h>     // MFC support for ribbons and control bars
 
 
-#include <boost/variant.hpp>
+#include <variant>
 #include <tuple>
 #include <limits>
 #include <cmath>
@@ -41,8 +41,7 @@
 #include <sstream>
 
 #include <boost/signals2.hpp>
-#include <boost/variant.hpp>
-#include <boost/format.hpp>
+#include <format>
 
 
 #ifdef _UNICODE

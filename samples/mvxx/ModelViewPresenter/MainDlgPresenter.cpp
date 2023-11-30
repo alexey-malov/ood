@@ -53,7 +53,7 @@ void CMainDlgPresenter::UpdateSolution()
 	};
 
 	SolutionPrinter printer(m_view);
-	m_solver.GetEquationRoots().apply_visitor(printer);
+	std::visit(printer, m_solver.GetEquationRoots());
 }
 
 void CMainDlgPresenter::UpdateChart()

@@ -5,7 +5,7 @@
 struct NoRealRoots {};
 struct InfiniteNumberOfRoots {};
 
-typedef boost::variant<NoRealRoots, InfiniteNumberOfRoots, double, std::pair<double, double>> EquationRoots;
+typedef std::variant<NoRealRoots, InfiniteNumberOfRoots, double, std::pair<double, double>> EquationRoots;
 
 
 class CEquationSolver

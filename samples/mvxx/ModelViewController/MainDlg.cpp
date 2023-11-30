@@ -109,16 +109,16 @@ void CMainDlg::UpdateEquation()
 		}
 		void operator()(double root)
 		{
-			self.SetSolutionText((boost::wformat(L"One root: %1%") % root).str());
+			self.SetSolutionText(std::format(L"One root: %1%", root));
 		}
 		void operator()(const std::pair<double, double> & roots)
 		{
-			self.SetSolutionText((boost::wformat(L"Two roots: %1% and %2%") % roots.first % roots.second).str());
+			self.SetSolutionText(std::format(L"Two roots: %1% and %2%", roots.first, roots.second));
 		}
 	};
 
 	SolutionPrinter printer(*this);
-	solution.apply_visitor(printer);
+	std::visit(printer, solution);
 
 	auto ToSignedString = [](double value) {
 		std::wostringstream strm;
@@ -127,7 +127,10 @@ void CMainDlg::UpdateEquation()
 		return ((value < 0) ? L"- " : L"+ ") + strm.str();
 	};
 
-	SetEquationText((boost::wformat(L"%1%x\u00b2 %2%x %3% = 0") % m_solver.GetQuadraticCoeff() % ToSignedString(m_solver.GetLinearCoeff()) % ToSignedString(m_solver.GetConstantCoeff())).str());
+	SetEquationText(std::format(L"{0}x\u00b2 {1}x {2} = 0", 
+		m_solver.GetQuadraticCoeff(), 
+		ToSignedString(m_solver.GetLinearCoeff()),
+		ToSignedString(m_solver.GetConstantCoeff())));
 }
 
 void CMainDlg::OnChangeCoeffA()

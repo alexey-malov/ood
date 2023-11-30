@@ -5,7 +5,7 @@
 struct NoRealRoots {};
 struct InfiniteNumberOfRoots {};
 
-using EquationRoots = boost::variant<NoRealRoots, InfiniteNumberOfRoots, double, std::pair<double, double>>;
+using EquationRoots = std::variant<NoRealRoots, InfiniteNumberOfRoots, double, std::pair<double, double>>;
 
 class CEquationSolver
 {
