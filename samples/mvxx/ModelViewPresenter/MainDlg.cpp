@@ -105,12 +105,12 @@ void CMainDlg::SetInfiniteSolutions()
 
 void CMainDlg::SetSingleSolution(double solution)
 {
-	SetSolutionText(std::format(L"One root: %1%", solution));
+	SetSolutionText(std::format(L"One root: {}", solution));
 }
 
 void CMainDlg::SetTwoRootsSolutuion(double root1, double root2)
 {
-	SetSolutionText(std::format(L"Two roots: %1% and %2%", root1, root2));
+	SetSolutionText(std::format(L"Two roots: {} and {}", root1, root2));
 }
 
 sig::connection CMainDlg::DoOnCoeffAChange(const CoeffChangeSignal::slot_type& handler)
