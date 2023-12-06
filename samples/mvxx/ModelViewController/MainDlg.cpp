@@ -109,11 +109,11 @@ void CMainDlg::UpdateEquation()
 		}
 		void operator()(double root)
 		{
-			self.SetSolutionText(std::format(L"One root: %1%", root));
+			self.SetSolutionText(std::format(L"One root: {}", root));
 		}
 		void operator()(const std::pair<double, double> & roots)
 		{
-			self.SetSolutionText(std::format(L"Two roots: %1% and %2%", roots.first, roots.second));
+			self.SetSolutionText(std::format(L"Two roots: {} and {}", roots.first, roots.second));
 		}
 	};
 
