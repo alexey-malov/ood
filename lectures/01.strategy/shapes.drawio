@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.8 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.8">
   <diagram id="aNAoFBgYtx0SwfT_OK-K" name="Page-1">
-    <mxGraphModel dx="2514" dy="2153" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2261" dy="2005" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -33,11 +33,11 @@
             <mxPoint x="430" y="300" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="wwB7rLd3d0XcowF-7yqt-50" value="void Ellipse::Draw(ICanvas&amp;amp; canvas)&lt;br&gt;{&lt;br&gt;&amp;nbsp; &amp;nbsp; canvas.DrawEllipse(...);&lt;br&gt;}" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#ffff88;strokeColor=#36393d;" parent="1" vertex="1">
-          <mxGeometry x="420" y="284" width="240" height="70" as="geometry" />
+        <mxCell id="wwB7rLd3d0XcowF-7yqt-50" value="void Ellipse::Draw(ICanvas&amp;amp; canvas)&lt;br&gt;{&lt;br&gt;&amp;nbsp; &amp;nbsp; canvas.DrawEllipse(...);&lt;br&gt;}" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingTop=-6;fillColor=#ffff88;strokeColor=#36393d;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="420" y="284" width="290" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="wwB7rLd3d0XcowF-7yqt-51" value="void Rectangle::Draw(ICanvas&amp;amp; canvas)&lt;br&gt;{&lt;br&gt;&amp;nbsp; &amp;nbsp; canvas.DrawPolygon(...);&lt;br&gt;}" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#ffff88;strokeColor=#36393d;" parent="1" vertex="1">
-          <mxGeometry x="-250" y="284" width="240" height="70" as="geometry" />
+        <mxCell id="wwB7rLd3d0XcowF-7yqt-51" value="void Rectangle::Draw(ICanvas&amp;amp; canvas)&lt;br&gt;{&lt;br&gt;&amp;nbsp; &amp;nbsp; canvas.DrawPolygon(...);&lt;br&gt;}" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingTop=-6;fillColor=#ffff88;strokeColor=#36393d;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="-310" y="284" width="300" height="70" as="geometry" />
         </mxCell>
         <mxCell id="wwB7rLd3d0XcowF-7yqt-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="wwB7rLd3d0XcowF-7yqt-12" target="wwB7rLd3d0XcowF-7yqt-51" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -170,8 +170,8 @@
             <mxPoint x="-120" y="920" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="wwB7rLd3d0XcowF-7yqt-99" value="void Draw(ICanvas&amp;amp; canvas)&lt;br&gt;{&lt;br&gt;&amp;nbsp; &amp;nbsp; m_drawingStrategy-&amp;gt;Draw(canvas, this);&lt;br&gt;}" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#ffff88;strokeColor=#36393d;" parent="1" vertex="1">
-          <mxGeometry x="-120" y="900" width="250" height="70" as="geometry" />
+        <mxCell id="wwB7rLd3d0XcowF-7yqt-99" value="void Draw(ICanvas&amp;amp; canvas)&lt;br&gt;{&lt;br&gt;&amp;nbsp; &amp;nbsp; m_drawingStrategy-&amp;gt;Draw(canvas, m_bounds, m_color);&lt;br&gt;}" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingTop=-6;fillColor=#ffff88;strokeColor=#36393d;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="-280" y="900" width="410" height="70" as="geometry" />
         </mxCell>
         <mxCell id="wwB7rLd3d0XcowF-7yqt-106" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;" parent="1" source="wwB7rLd3d0XcowF-7yqt-104" target="wwB7rLd3d0XcowF-7yqt-102" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
@@ -248,22 +248,22 @@
         <mxCell id="wwB7rLd3d0XcowF-7yqt-33" value="..." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2" parent="wwB7rLd3d0XcowF-7yqt-30" vertex="1">
           <mxGeometry y="93" width="160" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-1" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;" edge="1" source="MGJPy2t_8Esak-aXlX0G-12" target="MGJPy2t_8Esak-aXlX0G-10" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-1" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;" parent="1" source="MGJPy2t_8Esak-aXlX0G-12" target="MGJPy2t_8Esak-aXlX0G-10" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="750" y="1156" as="sourcePoint" />
             <mxPoint x="910" y="1156" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-2" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;" edge="1" source="MGJPy2t_8Esak-aXlX0G-8" target="MGJPy2t_8Esak-aXlX0G-10" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-2" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;" parent="1" source="MGJPy2t_8Esak-aXlX0G-8" target="MGJPy2t_8Esak-aXlX0G-10" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="1164.6666666666665" y="1176" as="sourcePoint" />
             <mxPoint x="1275.3333333333335" y="1093" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" source="MGJPy2t_8Esak-aXlX0G-9" target="MGJPy2t_8Esak-aXlX0G-6" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="MGJPy2t_8Esak-aXlX0G-9" target="MGJPy2t_8Esak-aXlX0G-6" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" source="MGJPy2t_8Esak-aXlX0G-13" target="MGJPy2t_8Esak-aXlX0G-5" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="MGJPy2t_8Esak-aXlX0G-13" target="MGJPy2t_8Esak-aXlX0G-5" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="970" y="1165" />
@@ -272,46 +272,46 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-5" value="void Draw(ICanvas&amp;amp; canvas, Rect bounds, Color color)&lt;br&gt;{&lt;br&gt;&amp;nbsp; &amp;nbsp; canvas.DrawPolygon(...);&lt;br&gt;}" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" vertex="1" parent="1">
-          <mxGeometry x="890" y="1236" width="360" height="70" as="geometry" />
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-5" value="void Draw(ICanvas&amp;amp; canvas, Rect bounds, Color color)&lt;br&gt;{&lt;br&gt;&amp;nbsp; &amp;nbsp; canvas.DrawPolygon(...);&lt;br&gt;}" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingTop=-6;fontFamily=Lucida Console;fillColor=#ffff88;strokeColor=#36393d;" parent="1" vertex="1">
+          <mxGeometry x="840" y="1236" width="410" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-6" value="void Draw(ICanvas&amp;amp; canvas, Rect bounds, Color color)&lt;br&gt;{&lt;br&gt;&amp;nbsp; &amp;nbsp; canvas.DrawEllipse(...);&lt;br&gt;}" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" vertex="1" parent="1">
-          <mxGeometry x="1270" y="1236" width="360" height="70" as="geometry" />
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-6" value="void Draw(ICanvas&amp;amp; canvas, Rect bounds, Color color)&lt;br&gt;{&lt;br&gt;&amp;nbsp; &amp;nbsp; canvas.DrawEllipse(...);&lt;br&gt;}" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingTop=-6;fontFamily=Lucida Console;fillColor=#ffff88;strokeColor=#36393d;" parent="1" vertex="1">
+          <mxGeometry x="1270" y="1236" width="420" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-8" value="EllipseDrawingStrategy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;" vertex="1" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-8" value="EllipseDrawingStrategy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;" parent="1" vertex="1">
           <mxGeometry x="1297" y="1126" width="303" height="52" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-9" value="+Draw(canvas:ICanvas, bounds: Rect, color: Color)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="MGJPy2t_8Esak-aXlX0G-8">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-9" value="+Draw(canvas:ICanvas, bounds: Rect, color: Color)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" parent="MGJPy2t_8Esak-aXlX0G-8" vertex="1">
           <mxGeometry y="26" width="303" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-10" value="&lt;i&gt;&lt;span style=&quot;font-weight: normal&quot;&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/span&gt;&lt;br&gt;IDrawingStrategy&lt;/i&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=41;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;" vertex="1" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-10" value="&lt;i&gt;&lt;span style=&quot;font-weight: normal&quot;&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/span&gt;&lt;br&gt;IDrawingStrategy&lt;/i&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=41;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;" parent="1" vertex="1">
           <mxGeometry x="1120" y="1006" width="300" height="67" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-11" value="+Draw(canvas:ICanvas, bounds:Rect, color: Color)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2" vertex="1" parent="MGJPy2t_8Esak-aXlX0G-10">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-11" value="+Draw(canvas:ICanvas, bounds:Rect, color: Color)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2" parent="MGJPy2t_8Esak-aXlX0G-10" vertex="1">
           <mxGeometry y="41" width="300" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-12" value="RectangleDrawingStrategy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;" vertex="1" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-12" value="RectangleDrawingStrategy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;" parent="1" vertex="1">
           <mxGeometry x="960" y="1126" width="310" height="52" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-13" value="+Draw(canvas:ICanvas, bounds.Rect, color: Color)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="MGJPy2t_8Esak-aXlX0G-12">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-13" value="+Draw(canvas:ICanvas, bounds.Rect, color: Color)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" parent="MGJPy2t_8Esak-aXlX0G-12" vertex="1">
           <mxGeometry y="26" width="310" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-17" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;" edge="1" source="MGJPy2t_8Esak-aXlX0G-27" target="MGJPy2t_8Esak-aXlX0G-25" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-17" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;" parent="1" source="MGJPy2t_8Esak-aXlX0G-27" target="MGJPy2t_8Esak-aXlX0G-25" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="-30" y="946" as="sourcePoint" />
             <mxPoint x="130" y="946" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-18" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;" edge="1" source="MGJPy2t_8Esak-aXlX0G-23" target="MGJPy2t_8Esak-aXlX0G-25" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-18" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;" parent="1" source="MGJPy2t_8Esak-aXlX0G-23" target="MGJPy2t_8Esak-aXlX0G-25" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="384.6666666666665" y="966" as="sourcePoint" />
             <mxPoint x="495.3333333333335" y="883" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" source="MGJPy2t_8Esak-aXlX0G-24" target="MGJPy2t_8Esak-aXlX0G-22" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="MGJPy2t_8Esak-aXlX0G-24" target="MGJPy2t_8Esak-aXlX0G-22" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" source="MGJPy2t_8Esak-aXlX0G-28" target="MGJPy2t_8Esak-aXlX0G-21" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="MGJPy2t_8Esak-aXlX0G-28" target="MGJPy2t_8Esak-aXlX0G-21" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="190" y="955" />
@@ -320,64 +320,64 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-21" value="void Draw(ICanvas&amp;amp; canvas, Rect bounds, Color color)&lt;br&gt;{&lt;br&gt;&amp;nbsp; &amp;nbsp; canvas.DrawPolygon(...);&lt;br&gt;}" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#ffff88;strokeColor=#36393d;" vertex="1" parent="1">
-          <mxGeometry x="110" y="1026" width="360" height="70" as="geometry" />
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-21" value="void Draw(ICanvas&amp;amp; canvas, Rect bounds, Color color)&lt;br&gt;{&lt;br&gt;&amp;nbsp; &amp;nbsp; canvas.DrawPolygon(...);&lt;br&gt;}" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingTop=-6;fillColor=#ffff88;strokeColor=#36393d;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="60" y="1030" width="410" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-22" value="void Draw(ICanvas&amp;amp; canvas, Rect bounds, Color color)&lt;br&gt;{&lt;br&gt;&amp;nbsp; &amp;nbsp; canvas.DrawEllipse(...);&lt;br&gt;}" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#ffff88;strokeColor=#36393d;" vertex="1" parent="1">
-          <mxGeometry x="490" y="1026" width="360" height="70" as="geometry" />
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-22" value="void Draw(ICanvas&amp;amp; canvas, Rect bounds, Color color)&lt;br&gt;{&lt;br&gt;&amp;nbsp; &amp;nbsp; canvas.DrawEllipse(...);&lt;br&gt;}" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingTop=-6;fillColor=#ffff88;strokeColor=#36393d;fontFamily=Lucida Console;" parent="1" vertex="1">
+          <mxGeometry x="490" y="1026" width="410" height="74" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-23" value="EllipseDrawingStrategy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-23" value="EllipseDrawingStrategy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="517" y="916" width="303" height="52" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-24" value="+Draw(canvas:ICanvas, bounds: Rect, color: Color)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="MGJPy2t_8Esak-aXlX0G-23">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-24" value="+Draw(canvas:ICanvas, bounds: Rect, color: Color)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" parent="MGJPy2t_8Esak-aXlX0G-23" vertex="1">
           <mxGeometry y="26" width="303" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-25" value="&lt;i&gt;&lt;span style=&quot;font-weight: normal&quot;&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/span&gt;&lt;br&gt;IDrawingStrategy&lt;/i&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=41;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-25" value="&lt;i&gt;&lt;span style=&quot;font-weight: normal&quot;&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/span&gt;&lt;br&gt;IDrawingStrategy&lt;/i&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=41;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="400" y="729" width="300" height="67" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-26" value="+Draw(canvas:ICanvas, bounds:Rect, color: Color)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2" vertex="1" parent="MGJPy2t_8Esak-aXlX0G-25">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-26" value="+Draw(canvas:ICanvas, bounds:Rect, color: Color)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2" parent="MGJPy2t_8Esak-aXlX0G-25" vertex="1">
           <mxGeometry y="41" width="300" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-27" value="RectangleDrawingStrategy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-27" value="RectangleDrawingStrategy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="180" y="916" width="310" height="52" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-28" value="+Draw(canvas:ICanvas, bounds.Rect, color: Color)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="MGJPy2t_8Esak-aXlX0G-27">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-28" value="+Draw(canvas:ICanvas, bounds.Rect, color: Color)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" parent="MGJPy2t_8Esak-aXlX0G-27" vertex="1">
           <mxGeometry y="26" width="310" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-29" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;" edge="1" parent="1" source="MGJPy2t_8Esak-aXlX0G-25" target="wwB7rLd3d0XcowF-7yqt-38">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-29" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;" parent="1" source="MGJPy2t_8Esak-aXlX0G-25" target="wwB7rLd3d0XcowF-7yqt-38" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="280" y="750" as="sourcePoint" />
             <mxPoint x="440" y="750" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-30" value="Slide" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-30" value="Slide" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="357" y="-20" width="160" height="86" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-35" value="+ Draw(canvas:ICanvas)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="MGJPy2t_8Esak-aXlX0G-30">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-35" value="+ Draw(canvas:ICanvas)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="MGJPy2t_8Esak-aXlX0G-30" vertex="1">
           <mxGeometry y="26" width="160" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-32" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="MGJPy2t_8Esak-aXlX0G-30">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-32" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="MGJPy2t_8Esak-aXlX0G-30" vertex="1">
           <mxGeometry y="52" width="160" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-33" value="- m_shapes:[Shape*]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="MGJPy2t_8Esak-aXlX0G-30">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-33" value="- m_shapes:[Shape*]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="MGJPy2t_8Esak-aXlX0G-30" vertex="1">
           <mxGeometry y="60" width="160" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-34" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;" edge="1" parent="1" source="wwB7rLd3d0XcowF-7yqt-7" target="MGJPy2t_8Esak-aXlX0G-30">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-34" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;" parent="1" source="wwB7rLd3d0XcowF-7yqt-7" target="MGJPy2t_8Esak-aXlX0G-30" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="-290" y="230" as="sourcePoint" />
             <mxPoint x="-130" y="230" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-36" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" edge="1" parent="1" source="MGJPy2t_8Esak-aXlX0G-30" target="wwB7rLd3d0XcowF-7yqt-20">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-36" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" source="MGJPy2t_8Esak-aXlX0G-30" target="wwB7rLd3d0XcowF-7yqt-20" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="660" y="80" as="sourcePoint" />
             <mxPoint x="820" y="80" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-37" value="void Draw(ICanvas&amp;amp; canvas)&lt;br&gt;{&lt;br&gt;&amp;nbsp; for (auto* shape : m_shapes) {&lt;div&gt;&amp;nbsp; &amp;nbsp; shape-&amp;gt;Draw(canvas);&lt;/div&gt;&lt;div&gt;&amp;nbsp; }&lt;br&gt;}&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingTop=-6;fillColor=#ffff88;strokeColor=#36393d;fontFamily=Lucida Console;" vertex="1" parent="1">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-37" value="void Draw(ICanvas&amp;amp; canvas)&lt;br&gt;{&lt;br&gt;&amp;nbsp; for (auto* shape : m_shapes) {&lt;div&gt;&amp;nbsp; &amp;nbsp; shape-&amp;gt;Draw(canvas);&lt;/div&gt;&lt;div&gt;&amp;nbsp; }&lt;br&gt;}&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingTop=-6;fillColor=#ffff88;strokeColor=#36393d;fontFamily=Lucida Console;" parent="1" vertex="1">
           <mxGeometry x="630" y="-20" width="260" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="MGJPy2t_8Esak-aXlX0G-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="MGJPy2t_8Esak-aXlX0G-35" target="MGJPy2t_8Esak-aXlX0G-37">
+        <mxCell id="MGJPy2t_8Esak-aXlX0G-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="MGJPy2t_8Esak-aXlX0G-35" target="MGJPy2t_8Esak-aXlX0G-37" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
