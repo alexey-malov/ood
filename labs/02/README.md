@@ -116,10 +116,18 @@ observable-observer (например, кот и мышь и собака). Ин
 ## Задание 8 — Реализация паттерна Observer с использованием сигналов и слотов — 50 баллов
 
 Ознакомьтесь с возможностями библиотеки boost.signals2.
-<http://www.boost.org/doc/libs/1_60_0/doc/html/signals2.html>
+<https://www.boost.org/doc/libs/1_86_0/doc/html/signals2.html>
 
 Разработайте версию программы Weather Station Pro Duo, с использованием
 данной библиотеки. Для класса WeatherData напишите модульные тесты.
+
+Внимание, пользователи WeatherData должны иметь возможность подписаться на интересующие их
+события.
+
+Примеры паттерна "Наблюдатель", использующие boost.signals2:
+
+- [Наблюдение за курсом валюты](../../samples/observer/ObserverWithSignallingValue/)
+- [Наблюдение за курсом валюты, использующий объект `SignallingValue`](../../samples/observer/ObserverWithSignallingValue/)
 
 [^1]: Автор не является ни биологом, ни рыболовом-любителем, поэтому
     может ошибаться. Предположим, что во Вселенной, в которой есть
