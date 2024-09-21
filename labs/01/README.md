@@ -228,8 +228,8 @@ List
 ```txt
 1 circle circ1 #ff00ff 10.3 20.3 30
 2 rectangle rect1 #ff00ff 10 20 35 45.5
-3 triangle tr1 #ff00ff 0.5 23.5 10 25 35 11
-4 line ln1 #ff00ff 0.5 23.5 10 25 35 11
+3 triangle tr1 #ff00ff 0.5 23.5 10 25.5 35 11
+4 line ln1 #ff00ff 11.2 15.3 -2.7 2.25
 5 text txt1 #000000 100.3 100.2 12.8 Hello world
 ```
 
