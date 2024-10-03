@@ -281,7 +281,24 @@ DrawShape <id>
 - `DrawEllipse(double cx, double cy, double rx, double ry)`. Рисует эллипс с центром в точке (cx, cy), rx - горизонтальный радиус, ry - вертикальный радиус. Эллипс рисуется текущим цветом. Текущая позиция рисования не меняется.
 - `DrawText(double left, double top, double fontSize, const std::string& text)`. Рисует текст text с координатами верхнего левого угла (left, top), размерами шрифта fontSize. Текст выводится текущим цветом. Текущая позиция рисования не меняется.
 
-![Интерфейс gfx::ICanvas](images/gfx.svg)
+```mermaid
+classDiagram
+  namespace gfx {
+    class ICanvas {
+        <<interface>>
+        + MoveTo(x: double, y: double)
+        + SetColor(color: Color)
+        + LineTo(x: double, y: double)
+        + DrawEpilse(cx: double, cy: double, rx: double, ry: double)
+        + DrawText(left: double, top: double, fontSize: double, text: string)
+    }
+
+    class Color {
+        ...
+    }
+  }
+    ICanvas ..> Color : "Use"
+```
 
 Реализуйте этот интерфейс одним из предложенных способов:
 
@@ -307,7 +324,21 @@ DrawPicture
   - `Shape`. Моделирует фигуру. Предоставляет методы для управления фигурой и её рисования.
   - `Picture`. Моделирует сущность "Картина". Содержит методы для рисования картины, доступа к фигурам, их добавления и удаления.
   - Классы `Shape` и `Picture` должны располагаться в пространстве имён `shapes`.
-  ![Shape и Picture](images/shapes.svg)
+
+  ```mermaid
+  classDiagram
+    namespace shapes {
+      class Picture {
+        ...
+      }
+
+      class Shape {
+        ...
+      }
+    }
+      Picture *-- Shape
+  ```
+
   - Классы `Shape` и `Picture` не должны заниматься вводом-выводом.
   - Классы и интерфейсы необходимые для парсинга и обработки команд пользователя. Разместите их подходящем пространстве имён.
   - Прочие классы и интерфейсы, необходимые для реализации задания.
