@@ -27,6 +27,9 @@
     <ClCompile Include="CompoundEdit.cpp">
       <Filter>undo</Filter>
     </ClCompile>
+    <ClCompile Include="UndoManager.cpp">
+      <Filter>undo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IUndoableEdit.h">
@@ -39,6 +42,9 @@
       <Filter>undo</Filter>
     </ClInclude>
     <ClInclude Include="CompoundEdit.h">
+      <Filter>undo</Filter>
+    </ClInclude>
+    <ClInclude Include="UndoManager.h">
       <Filter>undo</Filter>
     </ClInclude>
   </ItemGroup>

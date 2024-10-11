@@ -134,12 +134,14 @@
     <ClCompile Include="AbstractUndoableEdit.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="CompoundEdit.cpp" />
+    <ClCompile Include="UndoManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractUndoableEdit.h" />
     <ClInclude Include="CompoundEdit.h" />
     <ClInclude Include="IUndoableEdit.h" />
     <ClInclude Include="IUndoableEdit_fwd.h" />
+    <ClInclude Include="UndoManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

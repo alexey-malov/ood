@@ -5,23 +5,25 @@
 namespace undo
 {
 
+using namespace std;
+
 bool AbstractUndoableEdit::CanUndo() const
 {
-	return m_isAlive && m_executed;
+	return IsExecuted() && m_isAlive;
 }
 
 bool AbstractUndoableEdit::CanRedo() const
 {
-	return m_isAlive && !m_executed;
+	return !IsExecuted() && m_isAlive;
 }
 
 void AbstractUndoableEdit::Undo()
 {
 	if (!CanUndo())
 	{
-		throw std::logic_error("Can't undo");
+		throw logic_error("Can't undo");
 	}
-	m_executed = false;
+	SetExecuted(false);
 	UndoImpl();
 }
 
@@ -29,15 +31,15 @@ void AbstractUndoableEdit::Redo()
 {
 	if (!CanRedo())
 	{
-		throw std::logic_error("Can't redo");
+		throw logic_error("Can't redo");
 	}
-	m_executed = true;
+	SetExecuted(true);
 	RedoImpl();
 }
 
 void AbstractUndoableEdit::Destroy() noexcept
 {
-	if (!m_isAlive)
+	if (m_isAlive)
 	{
 		m_isAlive = false;
 		DestroyImpl();
@@ -46,33 +48,74 @@ void AbstractUndoableEdit::Destroy() noexcept
 
 bool AbstractUndoableEdit::AddEdit(const IUndoableEditPtr& edit)
 {
-	if (!edit)
-	{
-		throw std::invalid_argument("Invalid edit");
-	}
+	assert(edit);
 	if (!m_isAlive)
 	{
-		throw std::logic_error("Edit has been already destroyed");
+		throw logic_error("UndoableEdit has been destroyed");
 	}
 	return AddEditImpl(edit);
 }
 
 bool AbstractUndoableEdit::ReplaceEdit(const IUndoableEditPtr& edit)
 {
-	if (!edit)
-	{
-		throw std::invalid_argument("Invalid edit");
-	}
+	assert(edit);
 	if (!m_isAlive)
 	{
-		throw std::logic_error("Edit has been already destroyed");
+		throw logic_error("UndoableEdit has been destroyed");
 	}
-	return ReplaceEditImpl(edit);
+	if (m_canBeReplaced)
+	{
+		return ReplaceEditImpl(edit);
+	}
+	return false;
 }
 
 std::string AbstractUndoableEdit::GetName() const
 {
+	assert(!m_name.empty());
 	return m_name;
+}
+
+void AbstractUndoableEdit::SetReplaceable(bool canBeReplaced)
+{
+	m_canBeReplaced = canBeReplaced;
+}
+
+void AbstractUndoableEdit::UndoImpl()
+{
+}
+
+void AbstractUndoableEdit::RedoImpl()
+{
+}
+
+void AbstractUndoableEdit::DestroyImpl() noexcept
+{
+}
+
+bool AbstractUndoableEdit::AddEditImpl(const IUndoableEditPtr& /*edit*/)
+{
+	return false;
+}
+
+bool AbstractUndoableEdit::ReplaceEditImpl(const IUndoableEditPtr& /*edit*/)
+{
+	return false;
+}
+
+bool AbstractUndoableEdit::IsExecuted() const
+{
+	return m_executed;
+}
+
+void AbstractUndoableEdit::SetExecuted(bool executed)
+{
+	m_executed = executed;
+}
+
+void AbstractUndoableEdit::SetName(const std::string& name)
+{
+	m_name = name;
 }
 
 } // namespace undo
