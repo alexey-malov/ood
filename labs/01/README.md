@@ -324,18 +324,18 @@ DrawPicture
   - `Picture`. Моделирует сущность "Картина". Содержит методы для рисования картины, доступа к фигурам, их добавления и удаления.
   - Классы `Shape` и `Picture` должны располагаться в пространстве имён `shapes`.
 
-  ```mermaid
-  classDiagram
-    namespace shapes {
-      class Picture {
-        ...
+    ```mermaid
+    classDiagram
+      namespace shapes {
+        class Picture {
+          ...
+        }
+        class Shape {
+          ...
+        }
       }
-      class Shape {
-        ...
-      }
-    }
-      Picture *-- Shape
-  ```
+        Picture *-- Shape
+    ```
 
   - Классы `Shape` и `Picture` не должны заниматься вводом-выводом.
   - Классы и интерфейсы необходимые для парсинга и обработки команд пользователя. Разместите их подходящем пространстве имён.
