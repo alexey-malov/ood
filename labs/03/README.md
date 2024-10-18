@@ -51,9 +51,46 @@
 
 Рассмотрите следующую иерархию наследования потоков ввода-вывода
 
-![Image 1](images/image1.png)
+```mermaid
+classDiagram
+  class InputStream {
+    <<interface>>
+    + IsEOF()
+    + ReadByte()
+    + ReadBlock(dstData, dataSize)
+  }
+  class FileInputStream {
+    + IsEOF()
+    + ReadByte()
+    + ReadBlock(dstData, dataSize)
+  }
+  class MemoryInputStream {
+    + IsEOF()
+    + ReadByte()
+    + ReadBlock(dstData, dataSize)
+  }
+  InputStream <|.. FileInputStream
+  InputStream <|.. MemoryInputStream
+```
 
-![Image 2](images/image2.png)
+```mermaid
+classDiagram
+  class IOutputStream {
+    <<interface>>
+    + WriteByte(data)
+    + WriteBlock(srcData, dataSize)
+  }
+  class FileOutputStream {
+    + WriteByte(data)
+    + WriteBlock(srcData, dataSize)
+  }
+  class MemoryOutputStream {
+    + WriteByte(data)
+    + WriteBlock(srcData, dataSize)
+  }
+  IOutputStream <|.. FileOutputStream
+  IOutputStream <|.. MemoryOutputStream
+```
 
 Конкретные реализации классов потоков выполняют ввод-вывод в файл либо в память (контейнер вектор).
 
