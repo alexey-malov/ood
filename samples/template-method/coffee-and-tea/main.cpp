@@ -6,7 +6,7 @@ using namespace std;
 namespace basic
 {
 
-class CCoffee
+class Coffee
 {
 public:
 	void PrepareRecipe()
@@ -16,7 +16,8 @@ public:
 		PourInCup();
 		AddSugarAndMilk();
 	}
-	
+
+private:
 	void BoilWater()
 	{
 		cout << "Boiling water" << endl;
@@ -38,7 +39,7 @@ public:
 	}
 };
 
-class CTea
+class Tea
 {
 public:
 	void PrepareRecipe()
@@ -49,6 +50,7 @@ public:
 		AddLemon();
 	}
 
+private:
 	void BoilWater()
 	{
 		cout << "Boiling water" << endl;
@@ -70,16 +72,18 @@ public:
 	}
 };
 
-}
+} // namespace basic
 
 namespace naive
 {
 
-class CCaffeineBeverage
+class CaffeineBeverage
 {
 public:
 	virtual void PrepareRecipe() = 0;
+	virtual ~CaffeineBeverage() = default;
 
+protected:
 	void BoilWater()
 	{
 		cout << "Boiling water" << endl;
@@ -89,11 +93,9 @@ public:
 	{
 		cout << "Pouring into cup" << endl;
 	}
-
-	virtual ~CCaffeineBeverage() = default;
 };
 
-class CCoffee : public CCaffeineBeverage
+class Coffee : public CaffeineBeverage
 {
 public:
 	void PrepareRecipe() override
@@ -104,6 +106,7 @@ public:
 		AddSugarAndMilk();
 	}
 
+private:
 	void BrewCoffeeGrinds()
 	{
 		cout << "Dripping Coffee through filter" << endl;
@@ -115,7 +118,7 @@ public:
 	}
 };
 
-class CTea : public CCaffeineBeverage
+class Tea : public CaffeineBeverage
 {
 public:
 	void PrepareRecipe() override
@@ -126,6 +129,7 @@ public:
 		AddLemon();
 	}
 
+private:
 	void SteepTeaBag()
 	{
 		cout << "Steeping the tea" << endl;
@@ -137,14 +141,16 @@ public:
 	}
 };
 
-}
+} // namespace naive
 
 namespace template_method
 {
 
-class CCaffeineBeverage
+class CaffeineBeverage
 {
 public:
+	virtual ~CaffeineBeverage() = default;
+
 	void PrepareRecipe()
 	{
 		BoilWater();
@@ -153,6 +159,7 @@ public:
 		AddCondiments();
 	}
 
+private:
 	void BoilWater()
 	{
 		cout << "Boiling water" << endl;
@@ -165,12 +172,11 @@ public:
 
 	virtual void Brew() = 0;
 	virtual void AddCondiments() = 0;
-	virtual ~CCaffeineBeverage() = default;
 };
 
-class CCoffee : public CCaffeineBeverage
+class Coffee : public CaffeineBeverage
 {
-public:
+private:
 	void Brew() override
 	{
 		cout << "Dripping Coffee through filter" << endl;
@@ -182,9 +188,9 @@ public:
 	}
 };
 
-class CTea : public CCaffeineBeverage
+class Tea : public CaffeineBeverage
 {
-public:
+private:
 	void Brew() override
 	{
 		cout << "Steeping the tea" << endl;
@@ -196,7 +202,7 @@ public:
 	}
 };
 
-}
+} // namespace template_method
 
 namespace template_method_structure
 {
@@ -226,17 +232,18 @@ public:
 		// Реализация
 	}
 
-	virtual void Hook()	{}
+	virtual void Hook() {}
 };
 
-}
+} // namespace template_method_structure
 
 namespace hooks
 {
 
-class CCaffeineBeverageWithHook
+class CaffeineBeverageWithHook
 {
 public:
+	virtual ~CaffeineBeverageWithHook() = default;
 	void PrepareRecipe()
 	{
 		BoilWater();
@@ -248,6 +255,7 @@ public:
 		}
 	}
 
+private:
 	void BoilWater()
 	{
 		cout << "Boiling water" << endl;
@@ -265,12 +273,11 @@ public:
 
 	virtual void Brew() = 0;
 	virtual void AddCondiments() = 0;
-	virtual ~CCaffeineBeverageWithHook() = default;
 };
 
-class CCoffeeWithHook : public CCaffeineBeverageWithHook
+class CoffeeWithHook : public CaffeineBeverageWithHook
 {
-public:
+private:
 	void Brew() override
 	{
 		cout << "Dripping Coffee through filter" << endl;
@@ -284,18 +291,18 @@ public:
 	{
 		cout << "Would you like milk and sugar with your coffee (y/n)? ";
 		string userInput;
-		return getline(cin, userInput) 
+		return getline(cin, userInput)
 			&& (userInput == "y" || userInput == "Y");
 	}
 };
 
 void Test()
 {
-	CCoffeeWithHook coffeeHook;
+	CoffeeWithHook coffeeHook;
 	coffeeHook.PrepareRecipe();
 }
 
-}
+} // namespace hooks
 
 void main()
 {
