@@ -91,54 +91,53 @@
 
 Ознакомьтесь с предложенной диаграммой классов. Укажите примеры применения принципа инверсии зависимостей, а также следствий их использования. Какие изменения Вы хотели бы внести в изображенную архитектуру приложения?
 
-![class-diagram](images/factory-diagram.svg)
 ```mermaid
 classDiagram
     class IShapeFactory {
         <<interface>>
-        + CreateShape(descr:string):CShape
+        + CreateShape(descr:string):Shape
     }
 
     class IDesigner {
         <<interface>>
-        + CreateDraft(strm):CPictureDraft
+        + CreateDraft(strm):PictureDraft
     }
 
-    class CDesigner {
+    class Designer {
         + CreateDraft(strm)
     }
 
-    class CPictureDraft {
+    class PictureDraft {
         + GetShapeCount()
-        + GetShape(index):CShape
+        + GetShape(index):Shape
     }
 
-    class CShape {
+    class Shape {
         + Draw(canvas:ICanvas)
         + GetColor()
     }
 
-    class CRectangle {
+    class Rectangle {
         + Draw(canvas)
         + GetLeftTop()
         + GetRightBottom()
     }
 
-    class CTriangle {
+    class Triangle {
         + Draw(canvas)
         + GetVertex(1)
         + GetVertex(2)
         + GetVertex(3)
     }
 
-    class CEllipse {
+    class Ellipse {
         + Draw(canvas)
         + GetCenter()
         + GetHorizontalRadius()
         + GetVerticalRadius()
     }
 
-    class CRegularPolygon {
+    class RegularPolygon {
         + Draw(canvas)
         + GetVertexCount()
         + GetCenter()
@@ -158,9 +157,9 @@ classDiagram
         + DrawEllipse(l, t, w, h)
     }
 
-    class CClient
+    class Client
 
-    class CPainter {
+    class Painter {
         + DrawPicture(draft, canvas)
     }
 
@@ -174,33 +173,33 @@ classDiagram
         + Black
     }
 
-    class CShapeFactory {
-        + createShape(descr):CShape
+    class ShapeFactory {
+        + createShape(descr):Shape
         - memberName
     }
 
-    CShapeFactory ..|> IShapeFactory
-    CShapeFactory ..> CRectangle
-    CShapeFactory ..> CTriangle
-    CShapeFactory ..> CEllipse
-    CShapeFactory ..> CRegularPolygon
-    CShapeFactory ..> CShape
-    CRectangle --> CShape
-    CTriangle --> CShape
-    CEllipse --> CShape
-    CRegularPolygon --> CShape
-    CShape --o Color
-    CShape "0..*" --o "1" CPictureDraft
-    CDesigner ..> CPictureDraft
-    CPainter ..> CPictureDraft
-    IShapeFactory --* CDesigner
-    CDesigner ..|> IDesigner
-    CClient ..> IDesigner
-    ICanvas --* CClient
-    ICanvas ..> Color
-    CClient ..> CPainter
-    CPainter ..> ICanvas
-    CCanvas ..> ICanvas
+    IShapeFactory <|.. ShapeFactory 
+    ShapeFactory ..> Rectangle
+    ShapeFactory ..> Triangle
+    ShapeFactory ..> Ellipse
+    ShapeFactory ..> RegularPolygon
+    IShapeFactory ..> Shape
+    Shape <|-- Rectangle 
+    Shape <|-- Triangle
+    Shape <|-- Ellipse
+    Shape <|-- RegularPolygon
+    Color --* Shape 
+    Shape "0..*" --* "1" PictureDraft
+    PictureDraft <.. Designer 
+    PictureDraft <.. Painter
+    IShapeFactory --* Designer
+    IDesigner <|.. Designer
+    ICanvas --* Client
+    Color <.. ICanvas
+    IDesigner <.. Client 
+    Painter <.. Client
+    ICanvas <.. Painter
+    ICanvas <|.. CCanvas 
 ```
 
 Разработайте основные классы, моделирующие основные сущности предметной области. Разработайте приложение, считывающее со стандартного потока ввода описания геометрических фигур, и формирующее на холсте соответствующее изображение (в простейшем случае – выводящее список примитивных команд в `stdout`).
