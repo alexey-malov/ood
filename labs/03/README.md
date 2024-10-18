@@ -59,18 +59,18 @@ classDiagram
     + ReadByte()
     + ReadBlock(dstData, dataSize)
   }
-  class CFileInputStream {
+  class FileInputStream {
     + IsEOF()
     + ReadByte()
     + ReadBlock(dstData, dataSize)
   }
-  class CMemoryInputStream {
+  class MemoryInputStream {
     + IsEOF()
     + ReadByte()
     + ReadBlock(dstData, dataSize)
   }
-  InputStream <|.. CFileInputStream
-  InputStream <|.. CMemoryInputStream
+  InputStream <|.. FileInputStream
+  InputStream <|.. MemoryInputStream
 ```
 
 ```mermaid
@@ -80,16 +80,16 @@ classDiagram
     + WriteByte(data)
     + WriteBlock(srcData, dataSize)
   }
-  class CFileOutputStream {
+  class FileOutputStream {
     + WriteByte(data)
     + WriteBlock(srcData, dataSize)
   }
-  class CMemoryOutputStream {
+  class MemoryOutputStream {
     + WriteByte(data)
     + WriteBlock(srcData, dataSize)
   }
-  IOutputStream <|.. CFileOutputStream
-  IOutputStream <|.. CMemoryOutputStream
+  IOutputStream <|.. FileOutputStream
+  IOutputStream <|.. MemoryOutputStream
 ```
 
 Конкретные реализации классов потоков выполняют ввод-вывод в файл либо в память (контейнер вектор).
