@@ -1,21 +1,23 @@
-#include <functional>
-#include <map>
-#include <iostream>
 #include <boost/noncopyable.hpp>
 #include <boost/signals2.hpp>
+#include <functional>
+#include <iostream>
+#include <map>
 
 using namespace std;
 namespace ph = std::placeholders;
 
 namespace signals = boost::signals2;
+using signals::scoped_connection;
+using signals::signal;
 
 class ICurrencyRate
 {
 public:
-	using RateSignal = signals::signal<void(double rate)>;
+	using RateSignal = signal<void(double rate)>;
 
-	virtual signals::connection DoOnRateChange(const RateSignal::slot_type & slot) = 0;
-	virtual double GetRate()const = 0;
+	[[nodiscard]] virtual scoped_connection DoOnRateChange(const RateSignal::slot_type& slot) = 0;
+	[[nodiscard]] virtual double GetRate() const = 0;
 
 	virtual ~ICurrencyRate() = default;
 };
@@ -32,12 +34,12 @@ public:
 		}
 	}
 
-	double GetRate() const override
+	[[nodiscard]] double GetRate() const override
 	{
 		return m_rubToUSD;
 	}
 
-	signals::connection DoOnRateChange(const RateSignal::slot_type & slot) override
+	[[nodiscard]] scoped_connection DoOnRateChange(const RateSignal::slot_type& slot) override
 	{
 		return m_rateChangeSignal.connect(slot);
 	}
@@ -47,18 +49,19 @@ private:
 	RateSignal m_rateChangeSignal;
 };
 
-class AverageCurrencyRateMonitor : boost::noncopyable
+class AverageCurrencyRateMonitor
 {
 public:
-	AverageCurrencyRateMonitor(ICurrencyRate & cr)
+	AverageCurrencyRateMonitor(ICurrencyRate& cr)
 	{
-		m_rateChangeConnection = cr.DoOnRateChange(bind(&AverageCurrencyRateMonitor::OnCurrencyRateChange, this, ph::_1));
+		m_rateChangeConnection = cr.DoOnRateChange(bind_front(&AverageCurrencyRateMonitor::OnCurrencyRateChange, this));
 	}
 
-	double GetAverageRate()const
+	[[nodiscard]] double GetAverageRate() const
 	{
 		return (m_count != 0) ? m_accRate / m_count : 0;
 	}
+
 private:
 	void OnCurrencyRateChange(double newRate)
 	{
@@ -69,14 +72,14 @@ private:
 
 	double m_accRate = 0.0;
 	int m_count = 0;
-	signals::scoped_connection m_rateChangeConnection;
+	scoped_connection m_rateChangeConnection;
 };
 
 int main()
 {
 	Stock s;
 
-	s.DoOnRateChange([](double rate) {
+	auto conn = s.DoOnRateChange([](double rate) {
 		cout << "Rate is: " << rate << " RUR/USD" << endl;
 	});
 
@@ -90,10 +93,8 @@ int main()
 		s.SetRate(70);
 		cout << "------------" << endl;
 	}
-	string ss;
+
 	s.SetRate(80);
 	s.SetRate(90);
 	s.SetRate(50);
-
-	return 0;
 }

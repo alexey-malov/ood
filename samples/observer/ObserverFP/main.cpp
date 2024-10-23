@@ -1,4 +1,3 @@
-#include <boost/noncopyable.hpp>
 #include <functional>
 #include <iostream>
 #include <map>
@@ -9,14 +8,14 @@ namespace ph = std::placeholders;
 class ICurrencyRate
 {
 public:
-	// ����������� - �������, ���������� ������ �� ��������� ����� ������
+	// Наблюдатель - функция, получающая сигнал об изменении курса валюты
 	using RateObserver = function<void(double rate)>;
 
 	using Token = uint64_t;
 
-	virtual Token DoOnRateChange(const RateObserver& observer) = 0;
+	[[nodiscard]] virtual Token DoOnRateChange(const RateObserver& observer) = 0;
 	virtual void RemoveRateChangeObserver(Token token) = 0;
-	virtual double GetRate() const = 0;
+	[[nodiscard]] virtual double GetRate() const = 0;
 
 protected:
 	~ICurrencyRate() = default;
@@ -25,6 +24,12 @@ protected:
 class Stock : public ICurrencyRate
 {
 public:
+	Stock() = default;
+
+	// Запрещаем копирование и перемещение объектов Stock
+	Stock(const Stock&) = delete;
+	Stock& operator=(const Stock&) = delete;
+
 	void SetRate(double rate)
 	{
 		if (m_rubToUSD != rate)
@@ -37,7 +42,7 @@ public:
 		}
 	}
 
-	Token DoOnRateChange(const RateObserver& observer) override
+	[[nodiscard]] Token DoOnRateChange(const RateObserver& observer) override
 	{
 		while (!m_observers.try_emplace(++m_nextToken, observer).second)
 			;
@@ -45,7 +50,7 @@ public:
 		return m_nextToken;
 	}
 
-	double GetRate() const override
+	[[nodiscard]] double GetRate() const override
 	{
 		return m_rubToUSD;
 	}
@@ -61,7 +66,7 @@ private:
 	map<Token, RateObserver> m_observers;
 };
 
-class AverageCurrencyRateMonitor : boost::noncopyable
+class AverageCurrencyRateMonitor
 {
 public:
 	AverageCurrencyRateMonitor(ICurrencyRate& cr)
@@ -70,15 +75,18 @@ public:
 		m_rateChangeToken = cr.DoOnRateChange([this](double rate) {
 			OnCurrencyRateChange(rate);
 		});
-		//m_rateChangeToken = cr.DoOnRateChange(bind(&AverageCurrencyRateMonitor::OnCurrencyRateChange, this, ph::_1));
+		//m_rateChangeToken = cr.DoOnRateChange(bind_front(&AverageCurrencyRateMonitor::OnCurrencyRateChange, this));
 	}
+
+	AverageCurrencyRateMonitor(const AverageCurrencyRateMonitor&) = delete;
+	AverageCurrencyRateMonitor& operator=(const AverageCurrencyRateMonitor&) = delete;
 
 	~AverageCurrencyRateMonitor()
 	{
 		m_currencyRate.RemoveRateChangeObserver(m_rateChangeToken);
 	}
 
-	double GetAverageRate() const
+	[[nodiscard]] double GetAverageRate() const
 	{
 		return (m_count != 0) ? m_accRate / m_count : 0;
 	}
@@ -101,7 +109,7 @@ int main()
 {
 	Stock s;
 
-	s.DoOnRateChange([](double rate) {
+	auto token = s.DoOnRateChange([](double rate) {
 		cout << "Rate is: " << rate << " RUR/USD" << endl;
 	});
 
@@ -116,8 +124,9 @@ int main()
 		cout << "------------" << endl;
 	}
 	s.SetRate(80);
+	// Отписались от получения уведомлений
+	s.RemoveRateChangeObserver(token);
+	// При следующих изменениях курса уведомления приходить не будут
 	s.SetRate(90);
 	s.SetRate(50);
-
-	return 0;
 }
