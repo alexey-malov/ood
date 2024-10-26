@@ -144,7 +144,7 @@ classDiagram
         + GetRadius()
     }
 
-    class CCanvas {
+    class Canvas {
         + SetColor(color)
         + DrawLine(from, to)
         + DrawEllipse(l, t, w, h)
@@ -175,7 +175,6 @@ classDiagram
 
     class ShapeFactory {
         + createShape(descr):Shape
-        - memberName
     }
 
     IShapeFactory <|.. ShapeFactory 
@@ -199,7 +198,8 @@ classDiagram
     IDesigner <.. Client 
     Painter <.. Client
     ICanvas <.. Painter
-    ICanvas <|.. CCanvas 
+    ICanvas <|.. Canvas
+    ICanvas <.. Shape 
 ```
 
 Разработайте основные классы, моделирующие основные сущности предметной области. Разработайте приложение, считывающее со стандартного потока ввода описания геометрических фигур, и формирующее на холсте соответствующее изображение (в простейшем случае – выводящее список примитивных команд в `stdout`).

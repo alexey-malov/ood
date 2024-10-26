@@ -1,8 +1,8 @@
-﻿#include <iostream>
+﻿#include <cstdint>
+#include <format>
+#include <iostream>
 #include <stdexcept>
 #include <string>
-#include <boost/format.hpp>
-#include <cstdint>
 
 using namespace std;
 
@@ -15,7 +15,7 @@ class ICanvas
 public:
 	// Ставит "перо" в точку x, y
 	virtual void MoveTo(int x, int y) = 0;
-	// Рисует линию с текущей позиции, передвигая перо в точку x,y 
+	// Рисует линию с текущей позиции, передвигая перо в точку x,y
 	virtual void LineTo(int x, int y) = 0;
 	virtual ~ICanvas() = default;
 };
@@ -33,7 +33,7 @@ public:
 		cout << "LineTo (" << x << ", " << y << ")" << endl;
 	}
 };
-}
+} // namespace graphics_lib
 
 // Пространство имен библиотеки для рисования фигур (использует graphics_lib)
 // Код библиотеки недоступен для изменения
@@ -49,22 +49,23 @@ struct Point
 class ICanvasDrawable
 {
 public:
-	virtual void Draw(graphics_lib::ICanvas & canvas)const = 0;
+	virtual void Draw(graphics_lib::ICanvas& canvas) const = 0;
 	virtual ~ICanvasDrawable() = default;
 };
 
 class CTriangle : public ICanvasDrawable
 {
 public:
-	CTriangle(const Point & p1, const Point & p2, const Point & p3)
+	CTriangle(const Point& p1, const Point& p2, const Point& p3)
 	{
 		// TODO: написать код конструктора
 	}
 
-	void Draw(graphics_lib::ICanvas & canvas)const override
+	void Draw(graphics_lib::ICanvas& canvas) const override
 	{
 		// TODO: написать код рисования треугольника на холсте
 	}
+
 private:
 	// TODO: дописать приватную часть
 };
@@ -72,35 +73,37 @@ private:
 class CRectangle : public ICanvasDrawable
 {
 public:
-	CRectangle(const Point & leftTop, int width, int height)
+	CRectangle(const Point& leftTop, int width, int height)
 	{
 		// TODO: написать код конструктора
 	}
 
-	void Draw(graphics_lib::ICanvas & canvas)const override
+	void Draw(graphics_lib::ICanvas& canvas) const override
 	{
 		// TODO: написать код рисования прямоугольника на холсте
 	}
+
 private:
-	// TODO: дописать приватную часть 
+	// TODO: дописать приватную часть
 };
 
 // Художник, способный рисовать ICanvasDrawable-объекты на ICanvas
 class CCanvasPainter
 {
 public:
-	CCanvasPainter(graphics_lib::ICanvas & canvas)
+	CCanvasPainter(graphics_lib::ICanvas& canvas)
 	{
 		// TODO: дописать конструктор класса
 	}
-	void Draw(const ICanvasDrawable & drawable)
+	void Draw(const ICanvasDrawable& drawable)
 	{
 		// TODO: дописать код рисования ICanvasDrawable на canvas, переданном в конструктор
 	}
+
 private:
 	// TODO: дописать приватную часть
 };
-}
+} // namespace shape_drawing_lib
 
 // Пространство имен современной графической библиотеки (недоступно для изменения)
 namespace modern_graphics_lib
@@ -108,7 +111,11 @@ namespace modern_graphics_lib
 class CPoint
 {
 public:
-	CPoint(int x, int y) :x(x), y(y) {}
+	CPoint(int x, int y)
+		: x(x)
+		, y(y)
+	{
+	}
 
 	int x;
 	int y;
@@ -118,7 +125,8 @@ public:
 class CModernGraphicsRenderer
 {
 public:
-	CModernGraphicsRenderer(ostream & strm) : m_out(strm)
+	CModernGraphicsRenderer(ostream& strm)
+		: m_out(strm)
 	{
 	}
 
@@ -142,14 +150,13 @@ public:
 	}
 
 	// Выполняет рисование линии
-	void DrawLine(const CPoint & start, const CPoint & end)
+	void DrawLine(const CPoint& start, const CPoint& end)
 	{
 		if (!m_drawing)
 		{
 			throw logic_error("DrawLine is allowed between BeginDraw()/EndDraw() only");
 		}
-		m_out << boost::format(R"(  <line fromX="%1%" fromY="%2%" toX="%3%" toY="%4%"/>)") 
-			% start.x % start.y % end.x % end.y << endl;
+		m_out << std::format(R"(  <line fromX="{}" fromY="{}" toX="{}" toY="{}"/>)", start.x, start.y, end.x, end.y) << endl;
 	}
 
 	// Этот метод должен быть вызван в конце рисования
@@ -162,16 +169,17 @@ public:
 		m_out << "</draw>" << endl;
 		m_drawing = false;
 	}
+
 private:
-	ostream & m_out;
+	ostream& m_out;
 	bool m_drawing = false;
 };
-}
+} // namespace modern_graphics_lib
 
 // Пространство имен приложения (доступно для модификации)
 namespace app
 {
-void PaintPicture(shape_drawing_lib::CCanvasPainter & painter)
+void PaintPicture(shape_drawing_lib::CCanvasPainter& painter)
 {
 	using namespace shape_drawing_lib;
 
@@ -197,7 +205,7 @@ void PaintPictureOnModernGraphicsRenderer()
 	// картину на renderer
 	// Подсказка: используйте паттерн "Адаптер"
 }
-}
+} // namespace app
 
 namespace graphics_lib_pro
 {
@@ -229,7 +237,7 @@ public:
 		// Реализация остается без изменения
 	}
 };
-}
+} // namespace graphics_lib_pro
 
 // Пространство имен обновленной современной графической библиотеки (недоступно для изменения)
 namespace modern_graphics_lib_pro
@@ -237,7 +245,11 @@ namespace modern_graphics_lib_pro
 class CPoint
 {
 public:
-	CPoint(int x, int y) :x(x), y(y) {}
+	CPoint(int x, int y)
+		: x(x)
+		, y(y)
+	{
+	}
 
 	int x;
 	int y;
@@ -247,7 +259,13 @@ public:
 class CRGBAColor
 {
 public:
-	CRGBAColor(float r, float g, float b, float a):r(r), g(g), b(b), a(a){}
+	CRGBAColor(float r, float g, float b, float a)
+		: r(r)
+		, g(g)
+		, b(b)
+		, a(a)
+	{
+	}
 	float r, g, b, a;
 };
 
@@ -255,7 +273,8 @@ public:
 class CModernGraphicsRenderer
 {
 public:
-	CModernGraphicsRenderer(ostream & strm) : m_out(strm)
+	CModernGraphicsRenderer(ostream& strm)
+		: m_out(strm)
 	{
 	}
 
@@ -271,7 +290,7 @@ public:
 	}
 
 	// Выполняет рисование линии
-	void DrawLine(const CPoint & start, const CPoint & end, const CRGBAColor& color)
+	void DrawLine(const CPoint& start, const CPoint& end, const CRGBAColor& color)
 	{
 		// TODO: выводит в output инструкцию для рисования линии в виде
 		// <line fromX="3" fromY="5" toX="5" toY="17">
@@ -285,11 +304,12 @@ public:
 	{
 		// Реализация остается без изменения
 	}
+
 private:
-	ostream & m_out;
+	ostream& m_out;
 	bool m_drawing = false;
 };
-}
+} // namespace modern_graphics_lib_pro
 
 int main()
 {
