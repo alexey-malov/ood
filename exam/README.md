@@ -141,6 +141,48 @@
 - Следованию каких принципов SOLID способствует применение паттерна?
 - Какие ограничения есть у паттерна?
 - Напишите пример кода, иллюстрирующий применение этого паттерна.
+- Напишите адаптер, адаптирующий объекты `adaptee` к интерфейсам `target`. См. диаграмму классов:
+
+  ```mermaid
+  classDiagram
+    namespace target {
+      class IShape {
+        <<interface>>
+        GetStyle() IStyle&
+      }
+
+      class IStyle {
+        <<interface>>
+        GetColor() uint32
+      }
+    }
+
+    namespace adaptee {
+      class Shape {
+        m_style: MyStyle
+        GetStyle() MyStyle
+      }
+      class Style {
+        m_color: Color
+        GetColor() Color
+      }
+      class Color {
+        <<struct>>
+        r: byte
+        g: byte
+        b: byte
+        a: byte
+      }
+    }
+    class Client {
+    }
+
+    IShape ..> IStyle
+    Shape *-- Style
+    Style *-- Color
+    Client ..> IShape
+    Client ..> IStyle
+  ```
 
 ### Паттерн проектирования "Шаблонный метод"
 
