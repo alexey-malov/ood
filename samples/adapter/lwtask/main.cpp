@@ -14,8 +14,11 @@ class ICanvas
 {
 public:
 	// Ставит "перо" в точку x, y
+	// До первого вызова MoveTo текущая позиция пера равна (0, 0)
 	virtual void MoveTo(int x, int y) = 0;
+	
 	// Рисует линию с текущей позиции, передвигая перо в точку x,y
+	// Текущая позиция становится равна переданной
 	virtual void LineTo(int x, int y) = 0;
 	virtual ~ICanvas() = default;
 };
