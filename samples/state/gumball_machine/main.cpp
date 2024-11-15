@@ -41,19 +41,19 @@ void TestGumballMachine(GumballMachineType & m)
 
 void TestNaiveGumballMachine()
 {
-	naive::CGumballMachine m(5);
+	naive::GumballMachine m(5);
 	TestGumballMachine(m);
 }
 
 void TestGumballMachineWithState()
 {
-	with_state::CGumballMachine m(5);
+	with_state::GumballMachine m(5);
 	TestGumballMachine(m);
 }
 
 void TestGumballMachineWithDynamicState()
 {
-	with_dynamic_state::CGumballMachine m(5);
+	with_dynamic_state::GumballMachine m(5);
 	TestGumballMachine(m);
 }
 

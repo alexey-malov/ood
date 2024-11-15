@@ -1,22 +1,22 @@
 ﻿#pragma once
 
+#include <format>
 #include <iostream>
-#include <boost/format.hpp>
 
 namespace naive
 {
-class CGumballMachine
+class GumballMachine
 {
 public:
 	enum class State
 	{
-		SoldOut,		// Жвачка закончилась
-		NoQuarter,		// Нет монетки
-		HasQuarter,		// Есть монетка
-		Sold,			// Монетка выдана
+		SoldOut, // Жвачка закончилась
+		NoQuarter, // Нет монетки
+		HasQuarter, // Есть монетка
+		Sold, // Монетка выдана
 	};
 
-	CGumballMachine(unsigned count)
+	GumballMachine(unsigned count)
 		: m_count(count)
 		, m_state(count > 0 ? State::NoQuarter : State::SoldOut)
 	{
@@ -92,20 +92,21 @@ public:
 		m_state = numBalls > 0 ? State::NoQuarter : State::SoldOut;
 	}
 
-	std::string ToString()const
+	std::string ToString() const
 	{
-		std::string state =
-			(m_state == State::SoldOut)    ? "sold out" :
-			(m_state == State::NoQuarter)  ? "waiting for quarter" :
-			(m_state == State::HasQuarter) ? "waiting for turn of crank"
-			                               : "delivering a gumball";
-		auto fmt = boost::format(R"(
+		std::string state = (m_state == State::SoldOut)
+			? "sold out"
+			: (m_state == State::NoQuarter)	 ? "waiting for quarter"
+			: (m_state == State::HasQuarter) ? "waiting for turn of crank"
+											 : "delivering a gumball";
+
+		return std::format(R"(
 Mighty Gumball, Inc.
 C++-enabled Standing Gumball Model #2016
-Inventory: %1% gumball%2%
-Machine is %3%
-)");
-		return (fmt % m_count % (m_count != 1 ? "s" : "") % state).str();
+Inventory: {} gumball{}
+Machine is {}
+)",
+			m_count, m_count != 1 ? "s" : "", state);
 	}
 
 private:
@@ -137,7 +138,7 @@ private:
 		}
 	}
 
-	unsigned m_count;	// Количество шариков
+	unsigned m_count; // Количество шариков
 	State m_state = State::SoldOut;
 };
-}
+} // namespace naive

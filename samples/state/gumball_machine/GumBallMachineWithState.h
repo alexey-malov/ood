@@ -27,10 +27,10 @@ struct IGumballMachine
 	virtual ~IGumballMachine() = default;
 };
 
-class CSoldState : public IState
+class SoldState : public IState
 {
 public:
-	CSoldState(IGumballMachine & gumballMachine)
+	SoldState(IGumballMachine & gumballMachine)
 		:m_gumballMachine(gumballMachine)
 	{}
 	void InsertQuarter() override
@@ -66,10 +66,10 @@ private:
 	IGumballMachine & m_gumballMachine;
 };
 
-class CSoldOutState : public IState
+class SoldOutState : public IState
 {
 public:
-	CSoldOutState(IGumballMachine & gumballMachine)
+	SoldOutState(IGumballMachine & gumballMachine)
 		:m_gumballMachine(gumballMachine)
 	{}
 
@@ -97,10 +97,10 @@ private:
 	IGumballMachine & m_gumballMachine;
 };
 
-class CHasQuarterState : public IState
+class HasQuarterState : public IState
 {
 public:
-	CHasQuarterState(IGumballMachine & gumballMachine)
+	HasQuarterState(IGumballMachine & gumballMachine)
 		:m_gumballMachine(gumballMachine)
 	{}
 
@@ -130,10 +130,10 @@ private:
 	IGumballMachine & m_gumballMachine;
 };
 
-class CNoQuarterState : public IState
+class NoQuarterState : public IState
 {
 public:
-	CNoQuarterState(IGumballMachine & gumballMachine)
+	NoQuarterState(IGumballMachine & gumballMachine)
 		: m_gumballMachine(gumballMachine)
 	{}
 
@@ -162,10 +162,10 @@ private:
 	IGumballMachine & m_gumballMachine;
 };
 
-class CGumballMachine : private IGumballMachine
+class GumballMachine : private IGumballMachine
 {
 public:
-	CGumballMachine(unsigned numBalls)
+	GumballMachine(unsigned numBalls)
 		: m_soldState(*this)
 		, m_soldOutState(*this)
 		, m_noQuarterState(*this)
@@ -193,13 +193,13 @@ public:
 	}
 	std::string ToString()const
 	{
-		auto fmt = boost::format(R"(
+		return std::format(R"(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: %1% gumball%2%
-Machine is %3%
-)");
-		return (fmt % m_count % (m_count != 1 ? "s" : "") % m_state->ToString()).str();
+C++-enabled Standing Gumball Model #2016
+Inventory: {} gumball{}
+Machine is {}
+)",
+			m_count, m_count != 1 ? "s" : "", m_state->ToString());
 	}
 private:
 	unsigned GetBallCount() const override
@@ -232,10 +232,10 @@ private:
 	}
 private:
 	unsigned m_count = 0;
-	CSoldState m_soldState;
-	CSoldOutState m_soldOutState;
-	CNoQuarterState m_noQuarterState;
-	CHasQuarterState m_hasQuarterState;
+	SoldState m_soldState;
+	SoldOutState m_soldOutState;
+	NoQuarterState m_noQuarterState;
+	HasQuarterState m_hasQuarterState;
 	IState * m_state;
 	
 };
