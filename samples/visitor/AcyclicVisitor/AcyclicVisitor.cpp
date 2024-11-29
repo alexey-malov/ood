@@ -19,6 +19,32 @@ public:
 	virtual void Visit(Visitable&) = 0;
 };
 
+template <typename T, typename Base>
+class Visitable : public Base
+{
+public:
+	void Accept(VisitorBase& visitor) override
+	{
+		if (auto* v = dynamic_cast<Visitor<T>*>(&visitor))
+		{
+			v->Visit(static_cast<T&>(*this));
+		}
+	}
+};
+
+template <typename T, typename Base>
+class ConstVisitable : public Base
+{
+public:
+	void Accept(VisitorBase& visitor) const override
+	{
+		if (auto* v = dynamic_cast<Visitor<const T>*>(&visitor))
+		{
+			v->Visit(static_cast<const T&>(*this));
+		}
+	}
+};
+
 class Shape
 {
 public:
@@ -82,7 +108,8 @@ private:
 
 using Shapes = std::vector<std::shared_ptr<Shape>>;
 
-class ShapeGroup : public Shape
+class ShapeGroup
+	: public ConstVisitable<ShapeGroup, Shape>
 {
 public:
 	void AddShape(const std::shared_ptr<Shape>& shape)
@@ -98,14 +125,6 @@ public:
 	std::shared_ptr<Shape> GetShape(size_t index) const
 	{
 		return m_shapes.at(index);
-	}
-
-	void Accept(VisitorBase& visitor) const override
-	{
-		if (auto* v = dynamic_cast<Visitor<const ShapeGroup>*>(&visitor))
-		{
-			v->Visit(*this);
-		}
 	}
 
 private:
@@ -126,12 +145,16 @@ public:
 
 	void Visit(const Rectangle& rectangle) override
 	{
-		m_out << std::string(m_indent, ' ') << std::format(R"(<rectangle width="%1%" height="%2%"/>)", rectangle.GetWidth(), rectangle.GetHeight()) << std::endl;
+		m_out << std::string(m_indent, ' ')
+			  << std::format(R"(<rectangle width="{}" height="{}"/>)",
+					 rectangle.GetWidth(), rectangle.GetHeight())
+			  << std::endl;
 	}
 
 	void Visit(const Circle& circle) override
 	{
-		m_out << std::string(m_indent, ' ') << std::format(R"(<circle radius="%1%"/>)", circle.GetRadius()) << std::endl;
+		m_out << std::string(m_indent, ' ')
+			  << std::format(R"(<circle radius="{}"/>)", circle.GetRadius()) << std::endl;
 	}
 
 	void Visit(ShapeGroup const& group) override

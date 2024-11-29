@@ -7,30 +7,30 @@ using namespace std;
 
 class IShapeVisitor;
 
-class CShape
+class Shape
 {
 public:
 	virtual void Accept(IShapeVisitor& v) const = 0;
-	virtual ~CShape() = default;
+	virtual ~Shape() = default;
 };
 
-class CRectangle;
-class CCircle;
-class CShapeGroup;
+class Rectangle;
+class Circle;
+class ShapeGroup;
 
 class IShapeVisitor
 {
 public:
-	virtual void Visit(CRectangle const& rectangle) = 0;
-	virtual void Visit(CCircle const& circle) = 0;
-	virtual void Visit(CShapeGroup const& group) = 0;
+	virtual void Visit(Rectangle const& rectangle) = 0;
+	virtual void Visit(Circle const& circle) = 0;
+	virtual void Visit(ShapeGroup const& group) = 0;
 	virtual ~IShapeVisitor() = default;
 };
 
-class CRectangle : public CShape
+class Rectangle : public Shape
 {
 public:
-	CRectangle(double w, double h)
+	Rectangle(double w, double h)
 		: m_width(w)
 		, m_height(h)
 	{
@@ -54,10 +54,10 @@ private:
 	double m_width, m_height;
 };
 
-class CCircle : public CShape
+class Circle : public Shape
 {
 public:
-	CCircle(double r)
+	Circle(double r)
 		: m_radius(r)
 	{
 	}
@@ -75,12 +75,12 @@ private:
 	double m_radius;
 };
 
-typedef vector<shared_ptr<CShape>> Shapes;
+typedef vector<shared_ptr<Shape>> Shapes;
 
-class CShapeGroup : public CShape
+class ShapeGroup : public Shape
 {
 public:
-	void AddShape(const shared_ptr<CShape>& shape)
+	void AddShape(const shared_ptr<Shape>& shape)
 	{
 		m_shapes.push_back(shape);
 	}
@@ -90,7 +90,7 @@ public:
 		return m_shapes.size();
 	}
 
-	shared_ptr<CShape> GetShape(size_t index) const
+	shared_ptr<Shape> GetShape(size_t index) const
 	{
 		return m_shapes.at(index);
 	}
@@ -104,29 +104,29 @@ private:
 	Shapes m_shapes;
 };
 
-class CStreamOutputVisitor : public IShapeVisitor
+class StreamOutputVisitor : public IShapeVisitor
 {
 public:
-	CStreamOutputVisitor(ostream& out)
+	StreamOutputVisitor(ostream& out)
 		: m_out(out)
 	{
 	}
 
-	void Visit(CRectangle const& rectangle) override
+	void Visit(Rectangle const& rectangle) override
 	{
 		m_out << string(m_indent, ' ')
-			  << std::format(R"(<rectangle width="%1%" height="%2%"/>)",
+			  << std::format(R"(<rectangle width="{}" height="{}"/>)",
 					 rectangle.GetWidth(), rectangle.GetHeight())
 			  << endl;
 	}
 
-	void Visit(CCircle const& circle) override
+	void Visit(Circle const& circle) override
 	{
 		m_out << string(m_indent, ' ')
-			  << std::format(R"(<circle radius="%1%"/>)", circle.GetRadius()) << endl;
+			  << std::format(R"(<circle radius="{}"/>)", circle.GetRadius()) << endl;
 	}
 
-	void Visit(CShapeGroup const& group) override
+	void Visit(ShapeGroup const& group) override
 	{
 		m_out << string(m_indent, ' ') << "<group>" << endl;
 		m_indent += 2;
@@ -143,16 +143,16 @@ private:
 	size_t m_indent = 0;
 };
 
-ostream& operator<<(ostream& out, const CShape& sh)
+ostream& operator<<(ostream& out, const Shape& sh)
 {
-	CStreamOutputVisitor visitor(out);
+	StreamOutputVisitor visitor(out);
 	sh.Accept(visitor);
 	return out;
 }
 
 void PrintShapes(const Shapes& shapes, ostream& out)
 {
-	CStreamOutputVisitor visitor(out);
+	StreamOutputVisitor visitor(out);
 	for (auto& shape : shapes)
 	{
 		shape->Accept(visitor);
@@ -161,15 +161,15 @@ void PrintShapes(const Shapes& shapes, ostream& out)
 
 int main()
 {
-	auto group = make_shared<CShapeGroup>();
-	group->AddShape(make_shared<CCircle>(31));
-	group->AddShape(make_shared<CRectangle>(15, 16));
+	auto group = make_shared<ShapeGroup>();
+	group->AddShape(make_shared<Circle>(31));
+	group->AddShape(make_shared<Rectangle>(15, 16));
 
-	auto group1 = make_shared<CShapeGroup>();
-	group1->AddShape(make_shared<CRectangle>(15, 15));
+	auto group1 = make_shared<ShapeGroup>();
+	group1->AddShape(make_shared<Rectangle>(15, 15));
 	group->AddShape(group1);
 
-	Shapes shapes = { make_shared<CCircle>(42), group, make_shared<CRectangle>(30, 20) };
+	Shapes shapes = { make_shared<Circle>(42), group, make_shared<Rectangle>(30, 20) };
 	PrintShapes(shapes, cout);
 	return 0;
 }
