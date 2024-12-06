@@ -19,15 +19,14 @@ public:
 	};
 #endif
 
-protected:
-	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV support
+private:
+	void DoDataExchange(CDataExchange* pDX) override; // DDX/DDV support
 
 	// Implementation
-protected:
-	virtual BOOL OnInitDialog();
+	BOOL OnInitDialog() override;
 
 private:
-	HICON m_hIcon;
+	void AddAboutItemToSystemMenu();
 
 	// Generated message map functions
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
@@ -36,6 +35,7 @@ private:
 	afx_msg void OnBnClickedButton();
 	DECLARE_MESSAGE_MAP()
 private:
+	HICON m_hIcon;
 	CButton m_button;
 	int m_clickCount = 0;
 };

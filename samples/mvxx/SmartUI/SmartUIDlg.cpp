@@ -3,15 +3,14 @@
 //
 
 #include "pch.h"
-#include "framework.h"
-#include "SmartUI.h"
 #include "SmartUIDlg.h"
+#include "SmartUI.h"
 #include "afxdialogex.h"
+#include "framework.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
-
 
 // CAboutDlg dialog used for App About
 
@@ -22,18 +21,22 @@ public:
 
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_ABOUTBOX };
+	enum
+	{
+		IDD = IDD_ABOUTBOX
+	};
 #endif
 
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV support
 
-// Implementation
+	// Implementation
 protected:
 	DECLARE_MESSAGE_MAP()
 };
 
-CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
+CAboutDlg::CAboutDlg()
+	: CDialogEx(IDD_ABOUTBOX)
 {
 }
 
@@ -45,10 +48,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
-
 // SmartUIDlg dialog
-
-
 
 SmartUIDlg::SmartUIDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_SMARTUI_DIALOG, pParent)
@@ -59,9 +59,12 @@ SmartUIDlg::SmartUIDlg(CWnd* pParent /*=nullptr*/)
 void SmartUIDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+
+	// Связывает поле класса m_button с элементом управления IDC_BUTTON
 	DDX_Control(pDX, IDC_BUTTON, m_button);
 }
 
+// Эта карта сообщений задаёт соответствие между сообщениями и их обработчиками
 BEGIN_MESSAGE_MAP(SmartUIDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
@@ -69,15 +72,26 @@ BEGIN_MESSAGE_MAP(SmartUIDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON, &SmartUIDlg::OnBnClickedButton)
 END_MESSAGE_MAP()
 
-
-// SmartUIDlg message handlers
-
+// Этот обработчик вызывается перед тем, как окно будет показано
 BOOL SmartUIDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
 	// Add "About..." menu item to system menu.
+	AddAboutItemToSystemMenu();
 
+	// Set the icon for this dialog.  The framework does this automatically
+	//  when the application's main window is not a dialog
+	SetIcon(m_hIcon, TRUE); // Set big icon
+	SetIcon(m_hIcon, FALSE); // Set small icon
+
+	// TODO: Add extra initialization here
+
+	return TRUE; // return TRUE  unless you set the focus to a control
+}
+
+void SmartUIDlg::AddAboutItemToSystemMenu()
+{
 	// IDM_ABOUTBOX must be in the system command range.
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
@@ -95,15 +109,6 @@ BOOL SmartUIDlg::OnInitDialog()
 			pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
 		}
 	}
-
-	// Set the icon for this dialog.  The framework does this automatically
-	//  when the application's main window is not a dialog
-	SetIcon(m_hIcon, TRUE);			// Set big icon
-	SetIcon(m_hIcon, FALSE);		// Set small icon
-
-	// TODO: Add extra initialization here
-
-	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
 void SmartUIDlg::OnSysCommand(UINT nID, LPARAM lParam)

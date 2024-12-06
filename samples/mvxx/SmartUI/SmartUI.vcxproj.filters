@@ -54,6 +54,7 @@
     <None Include="res\SmartUI.rc2">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\SmartUI.ico">
