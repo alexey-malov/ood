@@ -295,6 +295,15 @@ public:
 		return it != m_authorBooks.end() ? &it->second : nullptr;
 	}
 
+	const Book* FindBook(const string& author, const string& title) const
+	{
+		auto* authorBooks = FindAuthorBooks(author);
+		if (!authorBooks)
+			return nullptr;
+		auto it = authorBooks->find(title);
+		return it != authorBooks->end() ? it->second : nullptr;
+	}
+
 private:
 	std::deque<Book> m_books;
 	std::unordered_map<std::string, BookByTitle> m_authorBooks;
@@ -365,6 +374,15 @@ public:
 		return it != m_authorBooks.end()
 			? make_unique<BookByTitleIterator>(it->second.begin(), it->second.end())
 			: make_unique<BookByTitleIterator>();
+	}
+
+	const Book* FindBook(const string& author, const string& title) const
+	{
+		auto authorBooksIt = m_authorBooks.find(author);
+		if (authorBooksIt == m_authorBooks.end())
+			return nullptr;
+		auto titleToBookIt = authorBooksIt->second.find(title);
+		return titleToBookIt != authorBooksIt->second.end() ? titleToBookIt->second : nullptr;
 	}
 
 private:
