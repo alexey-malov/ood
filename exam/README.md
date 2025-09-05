@@ -165,7 +165,7 @@
     namespace adaptee {
       class Shape {
         m_style: Style
-        GetStyle() Style
+        GetStyle() Style&
       }
       class Style {
         m_color: Color
