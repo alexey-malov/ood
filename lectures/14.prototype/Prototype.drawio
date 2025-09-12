@@ -1,0 +1,229 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.5 Chrome/134.0.6998.205 Electron/35.3.0 Safari/537.36" version="27.0.5">
+  <diagram name="Page-1" id="zG9zkIzMvjyMxk-u1TkJ">
+    <mxGraphModel dx="1090" dy="823" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="CCAASxPvr48RPNRsqe6e-1" value="&lt;i&gt;&lt;font style=&quot;color: rgb(0, 117, 0);&quot;&gt;Shape&lt;/font&gt;&lt;/i&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="160" width="180" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-2" value="+Clone():unique_ptr&amp;lt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;Shape&lt;/font&gt;&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=2" vertex="1" parent="CCAASxPvr48RPNRsqe6e-1">
+          <mxGeometry y="26" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-5" value="&lt;span style=&quot;font-style: normal;&quot;&gt;&lt;font style=&quot;color: rgb(37, 3, 255);&quot;&gt;Point&lt;/font&gt;&lt;/span&gt;" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="390" width="180" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-6" value="..." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CCAASxPvr48RPNRsqe6e-5">
+          <mxGeometry y="26" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-7" value="&lt;span style=&quot;&quot;&gt;PrototypeImpl&amp;lt;&lt;font style=&quot;color: rgb(0, 0, 204);&quot;&gt;Point&lt;/font&gt;, &lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;Shape&lt;/font&gt;, &lt;font style=&quot;color: rgb(0, 117, 0);&quot;&gt;Shape&lt;/font&gt;&amp;gt;&lt;/span&gt;" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="270" width="240" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-8" value="+Clone():unique_ptr&amp;lt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;Shape&lt;/font&gt;&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CCAASxPvr48RPNRsqe6e-7">
+          <mxGeometry y="26" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-9" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;" edge="1" parent="1" source="CCAASxPvr48RPNRsqe6e-7" target="CCAASxPvr48RPNRsqe6e-1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="450" y="230" as="sourcePoint" />
+            <mxPoint x="610" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-10" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;" edge="1" parent="1" source="CCAASxPvr48RPNRsqe6e-5" target="CCAASxPvr48RPNRsqe6e-7">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="470" y="330" as="sourcePoint" />
+            <mxPoint x="630" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="CCAASxPvr48RPNRsqe6e-11" target="CCAASxPvr48RPNRsqe6e-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-11" value="&lt;div&gt;unique_ptr&amp;lt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;b&gt;Shape&lt;/b&gt;&lt;/font&gt;&amp;gt; Clone() const override {&lt;/div&gt;&amp;nbsp; return make_unique&amp;lt;&lt;font style=&quot;color: rgb(37, 3, 255);&quot;&gt;&lt;b&gt;Point&lt;/b&gt;&lt;/font&gt;&amp;gt;(*static_cast&amp;lt;const &lt;font style=&quot;color: rgb(37, 3, 255);&quot;&gt;&lt;b&gt;Point&lt;/b&gt;&lt;/font&gt;*&amp;gt;(this));&lt;div&gt;}&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffff88;strokeColor=#36393d;fontFamily=Consolas;size=15;align=left;spacingLeft=2;" vertex="1" parent="1">
+          <mxGeometry x="50" y="480" width="430" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-13" value="&lt;i&gt;&lt;font style=&quot;color: rgb(0, 117, 0);&quot;&gt;Shape&lt;/font&gt;&lt;/i&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="160" width="180" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-14" value="+Clone():unique_ptr&amp;lt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;Shape&lt;/font&gt;&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=2" vertex="1" parent="CCAASxPvr48RPNRsqe6e-13">
+          <mxGeometry y="26" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-15" value="&lt;span style=&quot;font-style: normal;&quot;&gt;&lt;font style=&quot;color: rgb(37, 3, 255);&quot;&gt;ShapeGroup&lt;/font&gt;&lt;/span&gt;" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="390" width="180" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-16" value="..." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CCAASxPvr48RPNRsqe6e-15">
+          <mxGeometry y="26" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-17" value="&lt;span style=&quot;&quot;&gt;PrototypeImpl&amp;lt;&lt;font style=&quot;color: rgb(0, 0, 204);&quot;&gt;ShapeGroup&lt;/font&gt;, &lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;Shape&lt;/font&gt;, &lt;font style=&quot;color: rgb(0, 117, 0);&quot;&gt;Shape&lt;/font&gt;&amp;gt;&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="270" width="260" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-18" value="+Clone():unique_ptr&amp;lt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;Shape&lt;/font&gt;&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CCAASxPvr48RPNRsqe6e-17">
+          <mxGeometry y="26" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-19" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;" edge="1" source="CCAASxPvr48RPNRsqe6e-17" target="CCAASxPvr48RPNRsqe6e-13" parent="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="950" y="230" as="sourcePoint" />
+            <mxPoint x="1110" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-20" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;" edge="1" source="CCAASxPvr48RPNRsqe6e-15" target="CCAASxPvr48RPNRsqe6e-17" parent="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="970" y="330" as="sourcePoint" />
+            <mxPoint x="1130" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" source="CCAASxPvr48RPNRsqe6e-22" target="CCAASxPvr48RPNRsqe6e-18" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-22" value="&lt;div&gt;unique_ptr&amp;lt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;b&gt;Shape&lt;/b&gt;&lt;/font&gt;&amp;gt; Clone() const override {&lt;/div&gt;&amp;nbsp; return make_unique&amp;lt;&lt;font color=&quot;#2503ff&quot;&gt;&lt;b&gt;ShapeGroup&lt;/b&gt;&lt;/font&gt;&amp;gt;(*static_cast&amp;lt;const &lt;font style=&quot;color: rgb(37, 3, 255);&quot;&gt;&lt;b&gt;ShapeGroup&lt;/b&gt;&lt;/font&gt;*&amp;gt;(this));&lt;div&gt;}&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffff88;strokeColor=#36393d;fontFamily=Consolas;size=15;align=left;spacingLeft=2;" vertex="1" parent="1">
+          <mxGeometry x="540" y="480" width="490" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-23" value="&lt;i&gt;&lt;font style=&quot;color: rgb(0, 117, 0);&quot;&gt;IPerson&lt;/font&gt;&lt;/i&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="600" width="180" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-24" value="+Clone():unique_ptr&amp;lt;&lt;font color=&quot;#ff0000&quot;&gt;IPerson&lt;/font&gt;&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=2" vertex="1" parent="CCAASxPvr48RPNRsqe6e-23">
+          <mxGeometry y="26" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-43" value="+SpendDay()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=2" vertex="1" parent="CCAASxPvr48RPNRsqe6e-23">
+          <mxGeometry y="52" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-44" value="+GetName():string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=2" vertex="1" parent="CCAASxPvr48RPNRsqe6e-23">
+          <mxGeometry y="78" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-25" value="&lt;span style=&quot;font-style: normal;&quot;&gt;&lt;font style=&quot;color: rgb(37, 3, 255);&quot;&gt;Person&lt;/font&gt;&lt;/span&gt;" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="850" width="180" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-46" value="+GetName():string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=0" vertex="1" parent="CCAASxPvr48RPNRsqe6e-25">
+          <mxGeometry y="26" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-45" value="+SpendDay()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=0" vertex="1" parent="CCAASxPvr48RPNRsqe6e-25">
+          <mxGeometry y="52" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-27" value="&lt;span style=&quot;&quot;&gt;PrototypeImpl&amp;lt;&lt;font style=&quot;color: rgb(0, 0, 204);&quot;&gt;Person&lt;/font&gt;, &lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;IPerson&lt;/font&gt;, &lt;font style=&quot;color: rgb(0, 117, 0);&quot;&gt;IPerson&lt;/font&gt;&amp;gt;&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="515" y="750" width="310" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-28" value="+Clone():unique_ptr&amp;lt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;IPerson&lt;/font&gt;&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CCAASxPvr48RPNRsqe6e-27">
+          <mxGeometry y="26" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-29" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;" edge="1" parent="1" source="CCAASxPvr48RPNRsqe6e-27" target="CCAASxPvr48RPNRsqe6e-23">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="710" y="710" as="sourcePoint" />
+            <mxPoint x="870" y="710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-30" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;" edge="1" parent="1" source="CCAASxPvr48RPNRsqe6e-25" target="CCAASxPvr48RPNRsqe6e-27">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="730" y="810" as="sourcePoint" />
+            <mxPoint x="890" y="810" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="CCAASxPvr48RPNRsqe6e-32" target="CCAASxPvr48RPNRsqe6e-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-32" value="&lt;div&gt;unique_ptr&amp;lt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;b&gt;IPerson&lt;/b&gt;&lt;/font&gt;&amp;gt; Clone() const override {&lt;/div&gt;&amp;nbsp; return make_unique&amp;lt;&lt;font color=&quot;#2503ff&quot;&gt;&lt;b&gt;Person&lt;/b&gt;&lt;/font&gt;&amp;gt;(*static_cast&amp;lt;const &lt;font style=&quot;color: rgb(37, 3, 255);&quot;&gt;&lt;b&gt;Person&lt;/b&gt;&lt;/font&gt;*&amp;gt;(this));&lt;div&gt;}&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffff88;strokeColor=#36393d;fontFamily=Consolas;size=15;align=left;spacingLeft=2;" vertex="1" parent="1">
+          <mxGeometry x="110" y="892" width="450" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-33" value="&lt;span style=&quot;&quot;&gt;PrototypeImpl&amp;lt;&lt;font style=&quot;color: rgb(153, 0, 153);&quot;&gt;Worker&lt;/font&gt;, &lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;IPerson&lt;/font&gt;, &lt;font style=&quot;color: rgb(37, 3, 255);&quot;&gt;Person&lt;/font&gt;&amp;gt;&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="515" y="1000" width="310" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-34" value="+Clone():unique_ptr&amp;lt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;IPerson&lt;/font&gt;&amp;gt;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CCAASxPvr48RPNRsqe6e-33">
+          <mxGeometry y="26" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-37" value="&lt;span style=&quot;font-style: normal;&quot;&gt;&lt;font style=&quot;color: rgb(153, 0, 153);&quot;&gt;Worker&lt;/font&gt;&lt;/span&gt;" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="1120" width="180" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-47" value="+SpendDay()" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=0" vertex="1" parent="CCAASxPvr48RPNRsqe6e-37">
+          <mxGeometry y="26" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-39" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;" edge="1" parent="1" source="CCAASxPvr48RPNRsqe6e-33" target="CCAASxPvr48RPNRsqe6e-25">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="890" y="1012" as="sourcePoint" />
+            <mxPoint x="890" y="944" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-40" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;" edge="1" parent="1" source="CCAASxPvr48RPNRsqe6e-37" target="CCAASxPvr48RPNRsqe6e-33">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="680" y="990" as="sourcePoint" />
+            <mxPoint x="680" y="932" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="CCAASxPvr48RPNRsqe6e-41" target="CCAASxPvr48RPNRsqe6e-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-41" value="&lt;div&gt;unique_ptr&amp;lt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;b&gt;IPerson&lt;/b&gt;&lt;/font&gt;&amp;gt; Clone() const override {&lt;/div&gt;&amp;nbsp; return make_unique&amp;lt;&lt;font color=&quot;#990099&quot;&gt;&lt;b&gt;Worker&lt;/b&gt;&lt;/font&gt;&amp;gt;(*static_cast&amp;lt;const &lt;font style=&quot;color: rgb(153, 0, 153);&quot;&gt;&lt;b&gt;Worker&lt;/b&gt;&lt;/font&gt;*&amp;gt;(this));&lt;div&gt;}&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffff88;strokeColor=#36393d;fontFamily=Consolas;size=15;align=left;spacingLeft=2;" vertex="1" parent="1">
+          <mxGeometry x="110" y="1110" width="450" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-62" value="&lt;i&gt;&lt;font style=&quot;color: rgb(0, 117, 0);&quot;&gt;IPerson&lt;/font&gt;&lt;/i&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="600" width="180" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-63" value="+Clone():unique_ptr&amp;lt;&lt;font color=&quot;#ff0000&quot;&gt;IPerson&lt;/font&gt;&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=2" vertex="1" parent="CCAASxPvr48RPNRsqe6e-62">
+          <mxGeometry y="26" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-64" value="+SpendDay()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=2" vertex="1" parent="CCAASxPvr48RPNRsqe6e-62">
+          <mxGeometry y="52" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-65" value="+GetName():string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=2" vertex="1" parent="CCAASxPvr48RPNRsqe6e-62">
+          <mxGeometry y="78" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-66" value="&lt;span style=&quot;&quot;&gt;PrototypeImpl&amp;lt;&lt;font style=&quot;color: rgb(0, 0, 204);&quot;&gt;Person&lt;/font&gt;, &lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;IPerson&lt;/font&gt;,&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;color: rgb(153, 0, 153);&quot;&gt;PersonImpl&amp;lt;IPerson&amp;gt;&lt;/span&gt;&lt;span style=&quot;&quot;&gt;&amp;gt;&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="850" width="350" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-67" value="+Clone():unique_ptr&amp;lt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;IPerson&lt;/font&gt;&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CCAASxPvr48RPNRsqe6e-66">
+          <mxGeometry y="26" width="350" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-68" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;" edge="1" source="CCAASxPvr48RPNRsqe6e-69" target="CCAASxPvr48RPNRsqe6e-62" parent="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="1205" y="710" as="sourcePoint" />
+            <mxPoint x="1365" y="710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-69" value="&lt;span style=&quot;font-style: normal;&quot;&gt;&lt;font style=&quot;color: rgb(153, 0, 153);&quot;&gt;PersonImpl&amp;lt;IPerson&amp;gt;&lt;/font&gt;&lt;/span&gt;" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="750" width="180" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-70" value="+GetName():string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=0" vertex="1" parent="CCAASxPvr48RPNRsqe6e-69">
+          <mxGeometry y="26" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-73" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;" edge="1" parent="1" source="CCAASxPvr48RPNRsqe6e-66" target="CCAASxPvr48RPNRsqe6e-69">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="1510" y="874" as="sourcePoint" />
+            <mxPoint x="1510" y="802" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-74" value="&lt;span style=&quot;font-style: normal;&quot;&gt;&lt;font style=&quot;color: rgb(37, 3, 255);&quot;&gt;Person&lt;/font&gt;&lt;/span&gt;" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1005" y="948" width="180" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-76" value="+SpendDay()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=0" vertex="1" parent="CCAASxPvr48RPNRsqe6e-74">
+          <mxGeometry y="26" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-77" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;" edge="1" parent="1" source="CCAASxPvr48RPNRsqe6e-74" target="CCAASxPvr48RPNRsqe6e-66">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="1175" y="860" as="sourcePoint" />
+            <mxPoint x="1175" y="812" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-80" value="&lt;span style=&quot;&quot;&gt;PrototypeImpl&amp;lt;&lt;font style=&quot;color: rgb(153, 76, 0);&quot;&gt;Worker&lt;/font&gt;, &lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;IPerson&lt;/font&gt;,&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;color: rgb(153, 0, 153);&quot;&gt;PersonImpl&amp;lt;IPerson&amp;gt;&lt;/span&gt;&lt;span style=&quot;&quot;&gt;&amp;gt;&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="850" width="350" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-81" value="+Clone():unique_ptr&amp;lt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;IPerson&lt;/font&gt;&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CCAASxPvr48RPNRsqe6e-80">
+          <mxGeometry y="26" width="350" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-82" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;" edge="1" parent="1" source="CCAASxPvr48RPNRsqe6e-80" target="CCAASxPvr48RPNRsqe6e-69">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="1510" y="874" as="sourcePoint" />
+            <mxPoint x="1510" y="802" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-83" value="&lt;span style=&quot;font-style: normal;&quot;&gt;&lt;font style=&quot;color: rgb(153, 76, 0);&quot;&gt;Person&lt;/font&gt;&lt;/span&gt;" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1405" y="948" width="180" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-84" value="+SpendDay()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=0" vertex="1" parent="CCAASxPvr48RPNRsqe6e-83">
+          <mxGeometry y="26" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CCAASxPvr48RPNRsqe6e-85" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;" edge="1" parent="1" source="CCAASxPvr48RPNRsqe6e-83" target="CCAASxPvr48RPNRsqe6e-80">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="1105" y="958" as="sourcePoint" />
+            <mxPoint x="1105" y="912" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
