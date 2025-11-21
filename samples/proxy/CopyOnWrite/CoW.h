@@ -125,7 +125,7 @@ public:
 		return WriteProxy(m_shared.get());
 	}
 
-	WriteProxy Write() &
+	[[nodiscard]] WriteProxy Write() &
 	{
 		assert(m_shared);
 		EnsureUnique();
