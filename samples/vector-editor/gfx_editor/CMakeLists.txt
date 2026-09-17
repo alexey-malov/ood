@@ -13,3 +13,7 @@ project ("gfx_editor")
 
 # Include sub-projects.
 add_subdirectory ("01_hello")
+add_subdirectory ("02_draw")
+add_subdirectory ("03_select")
+add_subdirectory ("04_drag")
+add_subdirectory ("05_controller")
