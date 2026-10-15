@@ -28,7 +28,7 @@ public:
 
 class Shape : public IShape
 {
-protected:
+public:
 	explicit Shape(Rect bounds)
 		: m_bounds(bounds)
 	{
