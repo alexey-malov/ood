@@ -148,20 +148,44 @@ public:
 
 	Drawing() = default;
 
-	// ��������� ����������� � ����������� ������� Drawing, ����� �������� ������� � ����������� ��������� � ���������.
+	// Запрещаем копирование и перемещение объекта Drawing, чтобы избежать проблем с управлением ресурсами и сигналами.
 	Drawing(const Drawing&) = delete;
 	Drawing& operator=(const Drawing&) = delete;
 	Drawing(Drawing&&) = delete;
 	Drawing& operator=(Drawing&&) = delete;
+
+	// Откладывает уведомления об изменениях до завершения самой внешней операции
+	// Если действие вызывает исключение
+	template <typename F>
+	void WithDeferredNotifications(F&& action)
+	{
+		++m_notificationBatchDepth;
+		try
+		{
+			std::invoke(std::forward<F>(action));
+		}
+		catch (...)
+		{
+			const auto originalError = std::current_exception();
+			try
+			{
+				EndNotificationBatch();
+			}
+			catch (...)
+			{
+				// Preserve the exception raised by action.
+			}
+			std::rethrow_exception(originalError);
+		}
+		EndNotificationBatch();
+	}
 
 	void AddShape(std::unique_ptr<IShape> shape)
 	{
 		InsertShape(m_shapes.size(), std::move(shape));
 	}
 
-	void InsertShape(
-		size_t index,
-		std::unique_ptr<IShape> shape)
+	void InsertShape(size_t index, std::unique_ptr<IShape> shape)
 	{
 		if (!shape)
 		{
@@ -174,7 +198,7 @@ public:
 		}
 
 		auto connection = shape->DoOnChange([this] {
-			m_changeSignal();
+			NotifyChanged();
 		});
 
 		m_shapes.insert(
@@ -183,7 +207,7 @@ public:
 				std::move(shape),
 				std::move(connection) });
 
-		m_changeSignal();
+		 NotifyChanged();
 	}
 
 	[[nodiscard]] std::unique_ptr<IShape> ExtractShape(size_t index)
@@ -199,7 +223,7 @@ public:
 
 		m_shapes.erase(it);
 
-		m_changeSignal();
+		 NotifyChanged();
 
 		return shape;
 	}
@@ -229,6 +253,29 @@ public:
 	}
 
 private:
+	void NotifyChanged()
+	{
+		if (m_notificationBatchDepth != 0)
+		{
+			m_hasPendingNotification = true;
+		}
+		else
+		{
+			m_changeSignal();
+		}
+	}
+
+	void EndNotificationBatch()
+	{
+		assert(m_notificationBatchDepth > 0);
+		--m_notificationBatchDepth;
+		if (m_notificationBatchDepth == 0
+			&& std::exchange(m_hasPendingNotification, false))
+		{
+			m_changeSignal();
+		}
+	}
+
 	struct ShapeEntry
 	{
 		std::unique_ptr<IShape> shape;
@@ -237,4 +284,6 @@ private:
 
 	ChangeSignal m_changeSignal;
 	std::vector<ShapeEntry> m_shapes;
+	size_t m_notificationBatchDepth = 0;
+	bool m_hasPendingNotification = false;
 };
