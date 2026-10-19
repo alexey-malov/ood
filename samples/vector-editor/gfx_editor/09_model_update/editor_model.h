@@ -27,7 +27,7 @@ class EditorShape
 public:
 	Rect GetBounds() const
 	{
-		auto bounds = m_shape.GetBounds();
+		auto bounds = m_shape->GetBounds();
 
 		bounds.x += m_previewOffset.x;
 		bounds.y += m_previewOffset.y;
@@ -39,7 +39,7 @@ public:
 	{
 		// Пока единственный preview transform — перемещение.
 		// Переводим точку обратно в committed coordinates фигуры.
-		return m_shape.HitTest({ point.x - m_previewOffset.x,
+		return m_shape->HitTest({ point.x - m_previewOffset.x,
 			point.y - m_previewOffset.y });
 	}
 
@@ -75,23 +75,23 @@ public:
 		};
 
 		VisitorAdapter adapter(*this, visitor);
-		m_shape.Accept(adapter);
+		m_shape->Accept(adapter);
 	}
 
 private:
 	friend class EditorModel;
 
 	explicit EditorShape(IShape& shape)
-		: m_shape(shape)
+		: m_shape(&shape)
 	{
 	}
 
-	IShape& GetDomainShape()
+	IShape* GetDomainShapePtr()
 	{
 		return m_shape;
 	}
 
-	const IShape& GetDomainShape() const
+	const IShape* GetDomainShapePtr() const
 	{
 		return m_shape;
 	}
@@ -129,7 +129,7 @@ private:
 		return true;
 	}
 
-	IShape& m_shape;
+	IShape* m_shape;
 
 	Vector2 m_previewOffset;
 	bool m_selected = false;
@@ -336,7 +336,7 @@ public:
 		domainShapes.reserve(m_movePreview->shapes.size());
 		for (auto* shape : m_movePreview->shapes)
 		{
-			domainShapes.push_back(&shape->GetDomainShape());
+			domainShapes.push_back(shape->GetDomainShapePtr());
 		}
 
 		// Создаём команду только если есть ненулевой offset.
@@ -392,18 +392,76 @@ private:
 
 	void SyncShapes()
 	{
-		// В текущем Drawing есть только AddShape,
-		// поэтому достаточно добавлять новые EditorShape.
-		//
-		// Когда появятся RemoveShape / изменение Z-order,
-		// эту синхронизацию придётся развить.
+		const size_t count = m_drawing.GetShapeCount();
 
-		while (m_shapes.size() < m_drawing.GetShapeCount())
+		bool sameStructure = m_shapes.size() == count;
+
+		if (sameStructure)
 		{
-			auto& shape = m_drawing.GetShape(m_shapes.size());
-
-			m_shapes.emplace_back(new EditorShape(shape));
+			for (size_t i = 0; i < count; ++i)
+			{
+				if (m_shapes[i]->GetDomainShapePtr() != &m_drawing.GetShape(i))
+				{
+					sameStructure = false;
+					break;
+				}
+			}
 		}
+
+		if (sameStructure)
+		{
+			return;
+		}
+
+		const size_t notFound = m_shapes.size();
+
+		std::vector<size_t> oldIndices(count, notFound);
+		std::vector<std::unique_ptr<EditorShape>> updated(count);
+
+		// Подготавливаем новую коллекцию.
+		for (size_t i = 0; i < count; ++i)
+		{
+			auto& domainShape = m_drawing.GetShape(i);
+
+			auto it = std::ranges::find_if(
+				m_shapes,
+				[&](const auto& editorShape) {
+					return editorShape->GetDomainShapePtr()
+						== &domainShape;
+				});
+
+			// Если фигура уже есть в старой коллекции, запоминаем её индекс.
+			if (it != m_shapes.end())
+			{
+				oldIndices[i] = static_cast<size_t>(it - m_shapes.begin());
+			}
+			else // Если фигура новая, создаём EditorShape.
+			{
+				updated[i].reset(new EditorShape(domainShape));
+			}
+		}
+
+		// Структурное изменение прерывает активный Preview.
+		if (m_movePreview)
+		{
+			for (auto* shape : m_movePreview->shapes)
+			{
+				shape->ResetPreview();
+			}
+
+			m_movePreview.reset();
+		}
+
+		// Переносим существующие EditorShape без их пересоздания.
+		for (size_t i = 0; i < count; ++i)
+		{
+			if (oldIndices[i] != notFound)
+			{
+				updated[i] = std::move(m_shapes[oldIndices[i]]);
+			}
+		}
+
+		m_shapes.swap(updated);
 	}
 
 	void NotifyChanged()
