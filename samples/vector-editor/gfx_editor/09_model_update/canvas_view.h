@@ -92,6 +92,11 @@ public:
 	{
 	}
 
+	void OnDeletePressed()
+	{
+		m_editorModel.DeleteSelectedShapes();
+	}
+
 	void OnMousePressed(Point2 point, bool ctrlPressed)
 	{
 		const auto* shape = m_editorModel.FindShapeAt(point);
@@ -168,8 +173,7 @@ public:
 		{
 			if (pressed->button == sf::Mouse::Button::Left)
 			{
-				const bool ctrlPressed =
-					sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl)
+				const bool ctrlPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl)
 					|| sf::Keyboard::isKeyPressed(sf::Keyboard::Key::RControl);
 				m_controller.OnMousePressed(ToPoint(pressed->position), ctrlPressed);
 			}
@@ -184,6 +188,13 @@ public:
 		else if (const auto* moved = event.getIf<sf::Event::MouseMoved>())
 		{
 			m_controller.OnMouseMoved(ToPoint(moved->position));
+		}
+		else if (const auto* keyPressed = event.getIf<sf::Event::KeyPressed>())
+		{
+			if (keyPressed->code == sf::Keyboard::Key::Delete)
+			{
+				m_controller.OnDeletePressed();
+			}
 		}
 	}
 

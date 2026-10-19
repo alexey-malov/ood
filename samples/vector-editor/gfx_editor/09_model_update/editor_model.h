@@ -165,6 +165,63 @@ private:
 	Vector2 m_offset;
 };
 
+class DeleteShapesCommand final : public ICommand
+{
+public:
+	DeleteShapesCommand(Drawing& drawing, std::vector<size_t> indices)
+		: m_drawing(drawing)
+	{
+		if (indices.empty())
+			throw std::invalid_argument("No shapes to delete");
+
+		for (size_t i = 0; i < indices.size(); ++i)
+		{
+			if (indices[i] >= drawing.GetShapeCount() // Индексы должны быть в пределах диапазона
+				|| (i > 0 && indices[i] < indices[i - 1]) // Индексы должны быть строго возрастающими (без дубликатов)
+			)
+			{
+				throw std::invalid_argument("Invalid shape indices");
+			}
+		}
+
+		m_removed.reserve(indices.size());
+
+		for (size_t index : indices)
+		{
+			m_removed.push_back({ index, nullptr });
+		}
+	}
+
+	void Execute() override
+	{
+		// Удаляем с конца, чтобы индексы не смещались.
+		for (auto it = m_removed.rbegin();
+			it != m_removed.rend(); ++it)
+		{
+			it->shape = m_drawing.ExtractShape(it->index);
+		}
+	}
+
+	void Unexecute() override
+	{
+		// Вставляем с начала, восстанавливая Z-order.
+		for (auto& removed : m_removed)
+		{
+			m_drawing.InsertShape(removed.index, std::move(removed.shape));
+		}
+	}
+
+private:
+	struct RemovedShape
+	{
+		size_t index;
+		std::unique_ptr<IShape> shape;
+	};
+
+	Drawing& m_drawing;
+	std::vector<RemovedShape> m_removed;
+};
+
 class EditorModel
 {
 public:
@@ -367,6 +424,30 @@ public:
 	[[nodiscard]] ScopedConnection DoOnChange(ChangeSignal::slot_type slot)
 	{
 		return m_changeSignal.connect(std::move(slot));
+	}
+
+	void DeleteSelectedShapes()
+	{
+		if (m_movePreview)
+		{
+			CancelMove();
+		}
+
+		std::vector<size_t> indices;
+
+		for (size_t i = 0; i < m_shapes.size(); ++i)
+		{
+			if (m_shapes[i]->IsSelected())
+			{
+				indices.push_back(i);
+			}
+		}
+
+		if (!indices.empty())
+		{
+			m_commandSink(
+				std::make_unique<DeleteShapesCommand>(m_drawing, std::move(indices)));
+		}
 	}
 
 private:
