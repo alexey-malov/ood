@@ -20,19 +20,25 @@ public:
 		return m_drawing;
 	}
 
+	void ExecuteCommand(std::unique_ptr<ICommand> command)
+	{
+		m_drawing.WithDeferredNotifications([&] {
+			m_commandHistory.Execute(std::move(command));
+		});
+	}
+
 	void Undo()
 	{
-		m_commandHistory.Undo();
+		m_drawing.WithDeferredNotifications([&] {
+			m_commandHistory.Undo();
+		});
 	}
 
 	void Redo()
 	{
-		m_commandHistory.Redo();
-	}
-
-	void ExecuteCommand(std::unique_ptr<ICommand> command)
-	{
-		m_commandHistory.Execute(std::move(command));
+		m_drawing.WithDeferredNotifications([&] {
+			m_commandHistory.Redo();
+		});
 	}
 
 private:
