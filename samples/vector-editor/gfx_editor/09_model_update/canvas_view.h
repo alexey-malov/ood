@@ -17,9 +17,13 @@ public:
 			editorModel.GetShape(i).Accept(*this);
 		}
 
-		if (const auto* selectedShape = editorModel.GetSelectedShape())
+		for (size_t i = 0; i < editorModel.GetShapeCount(); ++i)
 		{
-			DrawSelection(*selectedShape);
+			const auto& shape = editorModel.GetShape(i);
+			if (shape.IsSelected())
+			{
+				DrawSelection(shape);
+			}
 		}
 	}
 
@@ -88,22 +92,31 @@ public:
 	{
 	}
 
-	void OnMousePressed(Point2 point)
+	void OnMousePressed(Point2 point, bool ctrlPressed)
 	{
-		auto* selectedShape = m_editorModel.FindShapeAt(point);
+		const auto* shape = m_editorModel.FindShapeAt(point);
 
-		m_editorModel.Select(selectedShape);
+		if (ctrlPressed)
+		{
+			if (shape)
+			{
+				m_editorModel.ToggleSelection(*shape);
+			}
+			m_isDragging = false;
+			return;
+		}
 
-		if (selectedShape)
+		// Clicking on an already selected shape preserves the rest of the selection.
+		if (!shape || !shape->IsSelected())
+		{
+			m_editorModel.SelectOnly(shape);
+		}
+
+		m_isDragging = shape != nullptr;
+		if (m_isDragging)
 		{
 			m_editorModel.BeginMove();
-
-			m_isDragging = true;
 			m_dragStartPosition = point;
-		}
-		else
-		{
-			m_isDragging = false;
 		}
 	}
 
@@ -153,11 +166,20 @@ public:
 	{
 		if (const auto* pressed = event.getIf<sf::Event::MouseButtonPressed>())
 		{
-			m_controller.OnMousePressed(ToPoint(pressed->position));
+			if (pressed->button == sf::Mouse::Button::Left)
+			{
+				const bool ctrlPressed =
+					sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl)
+					|| sf::Keyboard::isKeyPressed(sf::Keyboard::Key::RControl);
+				m_controller.OnMousePressed(ToPoint(pressed->position), ctrlPressed);
+			}
 		}
 		else if (const auto* released = event.getIf<sf::Event::MouseButtonReleased>())
 		{
-			m_controller.OnMouseReleased(ToPoint(released->position));
+			if (released->button == sf::Mouse::Button::Left)
+			{
+				m_controller.OnMouseReleased(ToPoint(released->position));
+			}
 		}
 		else if (const auto* moved = event.getIf<sf::Event::MouseMoved>())
 		{

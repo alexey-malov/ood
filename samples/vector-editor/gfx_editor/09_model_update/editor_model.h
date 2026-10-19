@@ -1,9 +1,12 @@
 #pragma once
 #include "command_history.h"
 #include "domain_model.h"
+#include <algorithm>
 #include <functional>
 #include <memory>
 #include <optional>
+#include <utility>
+#include <vector>
 
 class EditorShape;
 
@@ -34,8 +37,8 @@ public:
 
 	bool HitTest(Point2 point) const
 	{
-		// Пока единственный preview transform — перемещение.
-		// Переводим точку обратно в committed coordinates фигуры.
+		// РџРѕРєР° РµРґРёРЅСЃС‚РІРµРЅРЅС‹Р№ preview transform вЂ” РїРµСЂРµРјРµС‰РµРЅРёРµ.
+		// РџРµСЂРµРІРѕРґРёРј С‚РѕС‡РєСѓ РѕР±СЂР°С‚РЅРѕ РІ committed coordinates С„РёРіСѓСЂС‹.
 		return m_shape.HitTest({ point.x - m_previewOffset.x,
 			point.y - m_previewOffset.y });
 	}
@@ -132,25 +135,33 @@ private:
 	bool m_selected = false;
 };
 
-class MoveShapeCommand : public ICommand
+class MoveShapesCommand : public ICommand
 {
 public:
-	MoveShapeCommand(IShape& shape, Vector2 offset)
-		: m_shape(shape)
+	MoveShapesCommand(std::vector<IShape*> shapes, Vector2 offset)
+		: m_shapes(std::move(shapes))
 		, m_offset(offset)
 	{
 	}
+
 	void Execute() override
 	{
-		m_shape.MoveBy(m_offset);
+		for (auto* shape : m_shapes)
+		{
+			shape->MoveBy(m_offset);
+		}
 	}
+
 	void Unexecute() override
 	{
-		m_shape.MoveBy({ -m_offset.x, -m_offset.y });
+		for (auto* shape : m_shapes)
+		{
+			shape->MoveBy({ -m_offset.x, -m_offset.y });
+		}
 	}
 
 private:
-	IShape& m_shape;
+	std::vector<IShape*> m_shapes;
 	Vector2 m_offset;
 };
 
@@ -194,39 +205,57 @@ public:
 		return nullptr;
 	}
 
-	const EditorShape* GetSelectedShape() const
+	std::vector<const EditorShape*> GetSelectedShapes() const
 	{
+		std::vector<const EditorShape*> selected;
 		for (const auto& shape : m_shapes)
 		{
 			if (shape->IsSelected())
 			{
-				return shape.get();
+				selected.push_back(shape.get());
 			}
 		}
-
-		return nullptr;
+		return selected;
 	}
 
-	void Select(const EditorShape* selectedShape)
+	void SelectOnly(const EditorShape* selectedShape)
 	{
 		if (m_movePreview)
 		{
 			throw std::logic_error("Cannot change selection during move");
 		}
-
 		if (selectedShape && !Contains(*selectedShape))
 		{
 			throw std::invalid_argument("EditorShape does not belong to this EditorModel");
 		}
 
 		bool changed = false;
-
 		for (const auto& shape : m_shapes)
 		{
 			changed |= shape->SetSelected(shape.get() == selectedShape);
 		}
-
 		if (changed)
+		{
+			NotifyChanged();
+		}
+	}
+
+	void ToggleSelection(const EditorShape& selectedShape)
+	{
+		if (m_movePreview)
+		{
+			throw std::logic_error("Cannot change selection during move");
+		}
+		auto it = std::ranges::find_if(m_shapes, [&](const auto& shape) {
+			return shape.get() == &selectedShape;
+		});
+		if (it == m_shapes.end())
+		{
+			throw std::invalid_argument("EditorShape does not belong to this EditorModel");
+		}
+
+		auto& shape = **it;
+		if (shape.SetSelected(!shape.IsSelected()))
 		{
 			NotifyChanged();
 		}
@@ -236,18 +265,21 @@ public:
 	{
 		if (m_movePreview)
 		{
-			throw std::logic_error(
-				"Move operation is already in progress");
+			throw std::logic_error("Move operation is already in progress");
 		}
 
-		auto* shape = GetSelectedShape();
-
-		if (!shape)
+		std::vector<EditorShape*> selected;
+		for (const auto& shape : m_shapes)
 		{
-			return;
+			if (shape->IsSelected())
+			{
+				selected.push_back(shape.get());
+			}
 		}
-
-		m_movePreview = MovePreview{ .shape = shape };
+		if (!selected.empty())
+		{
+			m_movePreview = MovePreview{ .shapes = std::move(selected), .offset = {} };
+		}
 	}
 
 	void UpdateMove(Vector2 requestedOffset)
@@ -257,14 +289,16 @@ public:
 			return;
 		}
 
-		// Позже здесь может появиться snapping:
-		//
-		// auto snapResult = m_snapper.Snap(...);
-		// auto effectiveOffset = snapResult.effectiveOffset;
-
+		// РџРѕР·Р¶Рµ Р·РґРµСЃСЊ РјРѕР¶РµС‚ РїРѕСЏРІРёС‚СЊСЃСЏ snapping:
 		const auto effectiveOffset = requestedOffset;
+		m_movePreview->offset = effectiveOffset;
 
-		if (m_movePreview->shape->SetPreviewOffset(effectiveOffset))
+		bool changed = false;
+		for (auto* shape : m_movePreview->shapes)
+		{
+			changed |= shape->SetPreviewOffset(effectiveOffset);
+		}
+		if (changed)
 		{
 			NotifyChanged();
 		}
@@ -277,8 +311,11 @@ public:
 			return;
 		}
 
-		const bool changed = m_movePreview->shape->ResetPreview();
-
+		bool changed = false;
+		for (auto* shape : m_movePreview->shapes)
+		{
+			changed |= shape->ResetPreview();
+		}
 		m_movePreview.reset();
 
 		if (changed)
@@ -294,27 +331,37 @@ public:
 			return;
 		}
 
-		auto* editorShape = m_movePreview->shape;
-		const auto offset = editorShape->GetPreviewOffset();
-
-		// Важно убрать preview ДО Execute.
-		// Иначе notification от Drawing увидит:
-		//
-		// new committed state + old preview offset.
-		editorShape->ResetPreview();
-		m_movePreview.reset();
-
-		if (offset.x == 0 && offset.y == 0)
+		const auto offset = m_movePreview->offset;
+		std::vector<IShape*> domainShapes;
+		domainShapes.reserve(m_movePreview->shapes.size());
+		for (auto* shape : m_movePreview->shapes)
 		{
-			NotifyChanged();
-			return;
+			domainShapes.push_back(&shape->GetDomainShape());
 		}
 
-		auto command = std::make_unique<MoveShapeCommand>(
-			editorShape->GetDomainShape(),
-			offset);
+		// РЎРѕР·РґР°С‘Рј РєРѕРјР°РЅРґСѓ С‚РѕР»СЊРєРѕ РµСЃР»Рё РµСЃС‚СЊ РЅРµРЅСѓР»РµРІРѕР№ offset.
+		std::unique_ptr<ICommand> command;
+		if (offset.x != 0 || offset.y != 0)
+		{
+			command = std::make_unique<MoveShapesCommand>(std::move(domainShapes), offset);
+		}
 
-		m_commandSink(std::move(command));
+		// РџРµСЂРµРґ РІС‹РїРѕР»РЅРµРЅРёРµРј РєРѕРјР°РЅРґС‹ СѓР±РёСЂР°РµРј preview
+		bool changed = false;
+		for (auto* shape : m_movePreview->shapes)
+		{
+			changed |= shape->ResetPreview();
+		}
+		m_movePreview.reset();
+
+		if (command)
+		{
+			m_commandSink(std::move(command));
+		}
+		else if (changed)
+		{
+			NotifyChanged();
+		}
 	}
 
 	[[nodiscard]] ScopedConnection DoOnChange(ChangeSignal::slot_type slot)
@@ -325,13 +372,9 @@ public:
 private:
 	struct MovePreview
 	{
-		EditorShape* shape = nullptr;
+		std::vector<EditorShape*> shapes;
+		Vector2 offset;
 	};
-
-	EditorShape* GetSelectedShape()
-	{
-		return const_cast<EditorShape*>(std::as_const(*this).GetSelectedShape());
-	}
 
 	bool Contains(const EditorShape& shape) const
 	{
@@ -349,11 +392,11 @@ private:
 
 	void SyncShapes()
 	{
-		// В текущем Drawing есть только AddShape,
-		// поэтому достаточно добавлять новые EditorShape.
+		// Р’ С‚РµРєСѓС‰РµРј Drawing РµСЃС‚СЊ С‚РѕР»СЊРєРѕ AddShape,
+		// РїРѕСЌС‚РѕРјСѓ РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РґРѕР±Р°РІР»СЏС‚СЊ РЅРѕРІС‹Рµ EditorShape.
 		//
-		// Когда появятся RemoveShape / изменение Z-order,
-		// эту синхронизацию придётся развить.
+		// РљРѕРіРґР° РїРѕСЏРІСЏС‚СЃСЏ RemoveShape / РёР·РјРµРЅРµРЅРёРµ Z-order,
+		// СЌС‚Сѓ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёСЋ РїСЂРёРґС‘С‚СЃСЏ СЂР°Р·РІРёС‚СЊ.
 
 		while (m_shapes.size() < m_drawing.GetShapeCount())
 		{
