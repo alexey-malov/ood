@@ -1,4 +1,7 @@
-#include "WeatherData.h"
+#include "lib/CDisplay.h"
+#include "lib/CStatsDisplay.h"
+#include "lib/CWeatherData.h"
+#include <cstdlib>
 
 int main()
 {
@@ -17,5 +20,6 @@ int main()
 
 	wd.SetMeasurements(10, 0.8, 761);
 	wd.SetMeasurements(-10, 0.8, 761);
-	return 0;
+
+	return EXIT_SUCCESS;
 }
