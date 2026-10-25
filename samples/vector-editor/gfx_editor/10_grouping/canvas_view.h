@@ -144,6 +144,12 @@ public:
 		m_editorModel.GroupSelectedShapes();
 	}
 
+	void OnUngroupPressed()
+	{
+		m_isDragging = false;
+		m_editorModel.UngroupSelectedGroup();
+	}
+
 	void OnMousePressed(Point2 point, bool ctrlPressed)
 	{
 		const auto* shape = m_editorModel.FindShapeAt(point);
@@ -246,6 +252,11 @@ public:
 				&& keyPressed->control && !keyPressed->shift)
 			{
 				m_controller.OnGroupPressed();
+			}
+			else if (keyPressed->code == sf::Keyboard::Key::G
+				&& keyPressed->control && keyPressed->shift)
+			{
+				m_controller.OnUngroupPressed();
 			}
 		}
 	}

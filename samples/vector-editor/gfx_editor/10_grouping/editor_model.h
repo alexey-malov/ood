@@ -302,6 +302,79 @@ private:
 	GroupShape* m_groupIdentity; // Stable non-owning identity.
 };
 
+// Expands one top-level group in place, preserving its children and their Z-order.
+// Unlike Undo Group, Ungroup does not restore the children's historical indices.
+// The same GroupShape object is retained by this command while it is expanded.
+class UngroupShapesCommand final : public ICommand
+{
+public:
+	UngroupShapesCommand(Drawing& drawing, size_t groupIndex)
+		: m_drawing(drawing)
+		, m_groupIndex(groupIndex)
+	{
+		if (groupIndex >= drawing.GetShapeCount())
+		{
+			throw std::out_of_range("Invalid group index");
+		}
+
+		auto* group = dynamic_cast<GroupShape*>(&drawing.GetShape(groupIndex));
+		if (!group || group->GetShapeCount() == 0)
+		{
+			throw std::invalid_argument("Expected a non-empty top-level group");
+		}
+
+		m_groupIdentity = group;
+		m_childIdentities.reserve(group->GetShapeCount());
+		for (size_t i = 0; i < group->GetShapeCount(); ++i)
+		{
+			m_childIdentities.push_back(&group->GetShape(i));
+		}
+	}
+
+	[[nodiscard]] const std::vector<IShape*>& GetChildShapes() const noexcept
+	{
+		return m_childIdentities;
+	}
+
+	void Execute() override
+	{
+		assert(!m_group);
+		assert(&m_drawing.GetShape(m_groupIndex) == m_groupIdentity);
+
+		auto extracted = m_drawing.ExtractShape(m_groupIndex);
+		m_group.reset(static_cast<GroupShape*>(extracted.release()));
+
+		// Insert the children where the group used to be, in their group Z-order.
+		// The now-empty group remains owned by the command for Undo.
+		for (size_t i = 0; i < m_childIdentities.size(); ++i)
+		{
+			m_drawing.InsertShape(m_groupIndex + i, m_group->ExtractShape(0));
+		}
+	}
+
+	void Unexecute() override
+	{
+		assert(m_group && m_group->GetShapeCount() == 0);
+
+		// Remove from the back so the indices remain valid. Prepending each
+		// child to the group reconstructs the original order B, D, ...
+		for (size_t i = m_childIdentities.size(); i > 0; --i)
+		{
+			m_group->InsertShape(0, m_drawing.ExtractShape(m_groupIndex + i - 1));
+		}
+
+		// Restore the exact same GroupShape at its previous top-level index.
+		m_drawing.InsertShape(m_groupIndex, std::move(m_group));
+	}
+
+private:
+	Drawing& m_drawing;
+	size_t m_groupIndex;
+	std::unique_ptr<GroupShape> m_group; // Non-null only while Ungroup is applied.
+	GroupShape* m_groupIdentity = nullptr;
+	std::vector<IShape*> m_childIdentities; // Non-owning; shapes retain identity.
+};
+
 class EditorModel
 {
 public:
@@ -566,6 +639,55 @@ public:
 				SelectOnly(shape.get());
 				return;
 			}
+		}
+	}
+
+	void UngroupSelectedGroup()
+	{
+		if (m_movePreview)
+		{
+			CancelMove();
+		}
+
+		// First version: Ungroup is available for exactly one selected
+		// top-level group. Other selections leave the document unchanged.
+		size_t groupIndex = m_shapes.size();
+		for (size_t i = 0; i < m_shapes.size(); ++i)
+		{
+			if (m_shapes[i]->IsSelected())
+			{
+				if (groupIndex != m_shapes.size())
+				{
+					return;
+				}
+				groupIndex = i;
+			}
+		}
+
+		if (groupIndex == m_shapes.size()
+			|| !dynamic_cast<GroupShape*>(m_shapes[groupIndex]->GetDomainShapePtr()))
+		{
+			return;
+		}
+
+		auto command = std::make_unique<UngroupShapesCommand>(m_drawing, groupIndex);
+		// Save domain identities, not EditorShape*, before the structure changes.
+		std::vector<IShape*> children = command->GetChildShapes();
+		m_commandSink(std::move(command));
+
+		// SyncShapes has created top-level wrappers for the former children.
+		// Select those children without storing selection in the undo history.
+		bool changed = false;
+		for (const auto& shape : m_shapes)
+		{
+			const bool selected = std::ranges::find(
+									  children, shape->GetDomainShapePtr())
+				!= children.end();
+			changed |= shape->SetSelected(selected);
+		}
+		if (changed)
+		{
+			NotifyChanged();
 		}
 	}
 
