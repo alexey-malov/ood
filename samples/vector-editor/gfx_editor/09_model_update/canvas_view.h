@@ -142,8 +142,8 @@ public:
 			return;
 		}
 
-		// MouseReleased может прийти в позиции,
-		// для которой ещё не было MouseMoved.
+		// MouseReleased РјРѕР¶РµС‚ РїСЂРёР№С‚Рё РІ РїРѕР·РёС†РёРё,
+		// РґР»СЏ РєРѕС‚РѕСЂРѕР№ РµС‰С‘ РЅРµ Р±С‹Р»Рѕ MouseMoved.
 		m_editorModel.UpdateMove(point - m_dragStartPosition);
 
 		m_editorModel.CommitMove();
