@@ -9,7 +9,12 @@ add_executable(10_grouping
     "canvas_view.h"
     "editor_window.h"
     "drawing_document.h"
- "group_shape.h" "ishape.h" "types.h" "signals.h" "ishapevisitor.h")
+    "group_shape.h"
+    "shape_collection.h"
+    "ishape.h"
+    "types.h"
+    "signals.h"
+    "ishapevisitor.h")
 
 set_target_properties(10_grouping PROPERTIES
     CXX_STANDARD 20

@@ -680,9 +680,7 @@ public:
 		bool changed = false;
 		for (const auto& shape : m_shapes)
 		{
-			const bool selected = std::ranges::find(
-									  children, shape->GetDomainShapePtr())
-				!= children.end();
+			const bool selected = std::ranges::find(children, shape->GetDomainShapePtr()) != children.end();
 			changed |= shape->SetSelected(selected);
 		}
 		if (changed)

@@ -43,7 +43,7 @@ public:
 
 private:
 	Drawing m_drawing;
-	// Команды могут ссылаться на DrawingDocument
-	// поэтому CommandHistory должен быть объявлен после Drawing.
+	// РљРѕРјР°РЅРґС‹ РјРѕРіСѓС‚ СЃСЃС‹Р»Р°С‚СЊСЃСЏ РЅР° DrawingDocument
+	// РїРѕСЌС‚РѕРјСѓ CommandHistory РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РѕР±СЉСЏРІР»РµРЅ РїРѕСЃР»Рµ Drawing.
 	CommandHistory m_commandHistory;
 };
