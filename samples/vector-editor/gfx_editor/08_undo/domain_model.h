@@ -26,7 +26,7 @@ struct Vector2
 	float y = 0.0f;
 };
 
-Vector2 operator-(Point2 lhs, Point2 rhs)
+inline Vector2 operator-(Point2 lhs, Point2 rhs)
 {
 	return { lhs.x - rhs.x, lhs.y - rhs.y };
 }

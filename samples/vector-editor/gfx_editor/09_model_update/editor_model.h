@@ -177,7 +177,7 @@ public:
 		for (size_t i = 0; i < indices.size(); ++i)
 		{
 			if (indices[i] >= drawing.GetShapeCount() // Индексы должны быть в пределах диапазона
-				|| (i > 0 && indices[i] < indices[i - 1]) // Индексы должны быть строго возрастающими (без дубликатов)
+				|| (i > 0 && indices[i] <= indices[i - 1]) // Индексы должны быть строго возрастающими (без дубликатов)
 			)
 			{
 				throw std::invalid_argument("Invalid shape indices");
