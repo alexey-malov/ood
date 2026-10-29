@@ -266,11 +266,9 @@ public:
 	{
 		assert(m_group && m_group->GetShapeCount() == 0);
 
-		// Removing from the end keeps the stored indices valid.
-		// Inserting each child at position 0 restores the original Z-order.
-		for (auto it = m_indices.rbegin(); it != m_indices.rend(); ++it)
+		for (auto index : m_indices)
 		{
-			m_group->InsertShape(0, m_drawing.ExtractShape(*it));
+			m_group->AddShape(m_drawing.ExtractShape(index - m_group->GetShapeCount()));
 		}
 
 		// A freshly created group occupies the topmost drawing layer.
